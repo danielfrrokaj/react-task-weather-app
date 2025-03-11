@@ -10,6 +10,7 @@
   <li>API integration on frontend</li>
   <li>Different functions for proper frontend visualization</li>
   <li>Deployment through Vercel</li>
+  <li>Responsive Design</li>
 </ul>
 
 <h3>Figma Design vs. Final Work </h3>
