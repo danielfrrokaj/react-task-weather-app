@@ -14,6 +14,6 @@
 <h3>Figma Design vs. Final Work </h3>
 
 <div style="display=flex;"
-<img src="/screenshots/figmadesign.png" style="width: 200px;">
-<img src="/screenshots/finalwork.png" style="width: 200px;">
+<img src="/screenshots/figmadesign.png" style="width: 300px;"/>
+<img src="/screenshots/finalwork.png" style="width: 300px;"/>
 </div>
