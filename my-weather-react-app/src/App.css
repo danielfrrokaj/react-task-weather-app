@@ -42,7 +42,16 @@
   height: 100px; /* Fixed height */
   padding: 0 15px;
 }
-
+flex-container2 {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 800px;
+  margin: 20px auto;
+  gap: 20px;
+  height: 100px; /* Fixed height */
+  padding: 0 15px;
+  background-color: white;
+}
 .flex-item {
   flex: 1 1 calc(50% - 10px);
   min-width: 250px;
@@ -58,11 +67,6 @@ h1 {
   font-family: 'Poppins', sans-serif;
 }
 
-.city-data-wrapper {
-  max-width: 800px;
-  margin: 30px auto 0;
-  padding: 0 15px;
-}
 
 /* Responsive adjustments */
 @media (max-width: 600px) {

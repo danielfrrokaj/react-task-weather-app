@@ -39,13 +39,13 @@ const Nav = ({ onCitySelect }) => {
             setVisibleCities(cities);
         };
 
-        updateVisibleCities(); // Call the function to set initial visible cities
+        updateVisibleCities();
         window.addEventListener('resize', updateVisibleCities);
         
         return () => {
             window.removeEventListener('resize', updateVisibleCities);
         };
-    }, [currentIndex]); // Only re-run when currentIndex changes
+    }, [currentIndex, albanianCities]);
 
     const handlePrev = () => {
         setSlideDirection('slide-left');

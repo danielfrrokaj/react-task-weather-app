@@ -32,6 +32,7 @@ function App() {
         
         <div className="city-data-wrapper">
           <CityData cityName={selectedCity} />
+
         </div>
         
         {/* Your main content goes here */}

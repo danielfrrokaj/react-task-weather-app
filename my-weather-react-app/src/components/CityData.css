@@ -3,6 +3,7 @@
   border: 1px solid #2c2929;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   padding: 20px;
+  padding-left: 40px;
   width: 100%;
   max-width: 800px;
   margin: 0 auto;
@@ -19,6 +20,14 @@
 .temperature-container {
   display: flex;
   align-items: center;
+
+}
+
+.info-text {
+  display: block;
+  position: absolute;
+  padding-top: 60px;
+  font-size: 12px;
 }
 
 .temperature-text {
