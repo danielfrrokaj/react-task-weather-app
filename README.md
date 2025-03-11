@@ -2,7 +2,7 @@
 
 <a href="https://react-task-weather-app.vercel.app/"> Link to check it out live </a>
 
-<h3>This project is developed for educational purposes with the React Vite and it has the lower listed features.</h3>
+<h3>This project is developed for educational purposes with the React Vite Framework and it has the lower listed features.</h3>
 <ul>
   <li>NavBar component as a carousel for choosing the city</li>
   <li>Follows best practices for the React File Structure</li>
