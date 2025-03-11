@@ -18,7 +18,7 @@ export const fetchWeatherData = async (city) => {
       throw new Error(errorData.error?.message || 'Failed to fetch weather data');
     }
     
-    return await response.json();
+    return await response.json(); // This will return all weather data including humidity
   } catch (error) {
     console.error('Error fetching weather data:', error);
     throw error;

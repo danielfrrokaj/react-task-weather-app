@@ -1,0 +1,15 @@
+.footer {
+  background-color: rgba(255, 255, 255, 0.5); /* White background with 50% opacity */
+  padding: 20px; /* Add some padding */
+  text-align: center; /* Center the text */
+  position: relative; /* Position relative for any absolute children */
+  bottom: 0; /* Stick to the bottom */
+  width: 100%; /* Full width */
+  font-size: 13px;
+  color: rgb(91, 91, 91);
+} 
+
+.footer a {
+    color: rgb(255, 111, 0);
+    text-decoration: none;
+}

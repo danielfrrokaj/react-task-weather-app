@@ -1,0 +1,47 @@
+.weather-features {
+  display: flex;
+  flex-wrap: wrap; /* Allow wrapping for responsiveness */
+  margin: 20px 0;
+  gap: 20px; /* Add gap between columns */
+  padding-left: 5%;
+  padding-bottom: 30px;
+}
+
+.column {
+  flex: 1 1 50%; /* Each column takes 50% of the width */
+  box-sizing: border-box;
+}
+
+.weather-feature {
+  display: flex;
+  justify-content: space-between; /* Space between label and value */
+  padding: 10px; /* Add some padding for spacing */
+  position: relative; /* Position relative for the :after pseudo-element */
+}
+
+.weather-feature-label {
+  font-weight: bold; /* Make the label bold */
+}
+
+.weather-feature-value {
+  text-align: right; /* Align the value to the right */
+}
+
+/* Add a bottom border using :after */
+.weather-feature:after {
+  content: ''; /* Required for the pseudo-element */
+  display: block; /* Make it a block element */
+  width: 100%; /* Full width */
+  height: 1px; /* Height of the border */
+  background-color: darkgray; /* Color of the border */
+  position: absolute; /* Position it at the bottom */
+  left: 0; /* Align to the left */
+  bottom: 0; /* Align to the bottom */
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .column {
+    flex: 1 1 100%; /* Stack columns on mobile */
+  }
+} 

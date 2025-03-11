@@ -42,16 +42,7 @@
   height: 100px; /* Fixed height */
   padding: 0 15px;
 }
-flex-container2 {
-  display: flex;
-  flex-wrap: wrap;
-  max-width: 800px;
-  margin: 20px auto;
-  gap: 20px;
-  height: 100px; /* Fixed height */
-  padding: 0 15px;
-  background-color: white;
-}
+
 .flex-item {
   flex: 1 1 calc(50% - 10px);
   min-width: 250px;
@@ -73,4 +64,20 @@ h1 {
   .flex-item {
     flex: 1 1 100%;
   }
+}
+.flex-item2 {
+  padding: 20px
+}
+
+.city-data-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 770px;
+  margin: 30px auto;
+  gap: 20px;
+  height: auto; /* Fixed height */
+  padding: 0 15px;
+  background-color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid black;
 }

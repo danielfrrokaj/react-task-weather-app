@@ -19,54 +19,50 @@ const Nav = ({ onCitySelect }) => {
     const [activeCity, setActiveCity] = useState("Tirana");
 
     // Calculate how many cities to show based on screen width
-    useEffect(() => {
-        const updateVisibleCities = () => {
-            const width = window.innerWidth;
-            let visibleCount = 5; // Default for larger screens
-            
-            if (width < 768) {
-                visibleCount = 4;
-            }
-            if (width < 480) {
-                visibleCount = 4;
-            }
-            
-            const cities = [];
-            for (let i = 0; i < visibleCount; i++) {
-                const index = (currentIndex + i) % albanianCities.length;
-                cities.push(albanianCities[index]);
-            }
-            setVisibleCities(cities);
-        };
+    const updateVisibleCities = () => {
+        const width = window.innerWidth;
+        let visibleCount = 5; // Default for larger screens
+        
+        if (width < 768) {
+            visibleCount = 4;
+        }
+        if (width < 480) {
+            visibleCount = 4;
+        }
+        
+        const cities = [];
+        for (let i = 0; i < visibleCount; i++) {
+            const index = (currentIndex + i) % albanianCities.length;
+            cities.push(albanianCities[index]);
+        }
+        setVisibleCities(cities);
+    };
 
-        updateVisibleCities();
+    useEffect(() => {
+        updateVisibleCities(); // Call the function to set initial visible cities
         window.addEventListener('resize', updateVisibleCities);
         
         return () => {
             window.removeEventListener('resize', updateVisibleCities);
         };
-    }, [currentIndex, albanianCities]);
+    }, [currentIndex]); // Only re-run when currentIndex changes
 
     const handlePrev = () => {
         setSlideDirection('slide-left');
-        // Reset animation after a short delay to allow it to complete
         setTimeout(() => {
             setCurrentIndex((prevIndex) => 
                 prevIndex === 0 ? albanianCities.length - 1 : prevIndex - 1
             );
-            // Reset the slide direction after the animation completes
             setTimeout(() => setSlideDirection(null), 50);
         }, 50);
     };
 
     const handleNext = () => {
         setSlideDirection('slide-right');
-        // Reset animation after a short delay to allow it to complete
         setTimeout(() => {
             setCurrentIndex((prevIndex) => 
                 (prevIndex + 1) % albanianCities.length
             );
-            // Reset the slide direction after the animation completes
             setTimeout(() => setSlideDirection(null), 50);
         }, 50);
     };

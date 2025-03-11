@@ -50,7 +50,7 @@ const CityData = ({ cityName = 'Tirana' }) => {
                         {formatTemperature(weatherData.current.temp_c)}
                     </h2>
                     <img src={tempIcon} alt="Temperature" className="temperature-icon" /> 
-                    <p className='info-text'>Kohë me diell</p>
+                    <p className='info-text'>{weatherData.current.condition.text}</p>
                 </div>
             )}
         </div>
