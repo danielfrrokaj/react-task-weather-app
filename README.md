@@ -5,7 +5,6 @@
 <h3>This project is developed for educational purposes with the React Vite and it has the lower listed features.</h3>
 <ul>
   <li>NavBar component as a carousel for choosing the city</li>
-  <li>Is using useState and ReactRouter</li>
   <li>Follows best practices for the React File Structure</li>
   <li>Fetching data through an API</li>
   <li>API integration on frontend</li>
