@@ -6,7 +6,7 @@ const LocalTime = () => {
 
     useEffect(() => {
         const updateDay = () => {
-            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const days = [' dielë', ' hënë', ' martë', ' mërkurë', ' enjte', ' premte', ' shtunë'];
             const today = new Date();
             setCurrentDay(days[today.getDay()]);
         };
@@ -22,7 +22,7 @@ const LocalTime = () => {
 
     return (
         <div className="local-time-container">
-            <p className="day-text">Today is {currentDay}</p>
+            <p className="day-text">Sot është e{currentDay}</p>
         </div>
     );
 };

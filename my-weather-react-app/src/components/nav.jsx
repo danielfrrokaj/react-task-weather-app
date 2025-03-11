@@ -25,10 +25,10 @@ const Nav = ({ onCitySelect }) => {
             let visibleCount = 5; // Default for larger screens
             
             if (width < 768) {
-                visibleCount = 3;
+                visibleCount = 4;
             }
             if (width < 480) {
-                visibleCount = 1;
+                visibleCount = 4;
             }
             
             const cities = [];
@@ -39,13 +39,13 @@ const Nav = ({ onCitySelect }) => {
             setVisibleCities(cities);
         };
 
-        updateVisibleCities();
+        updateVisibleCities(); // Call the function to set initial visible cities
         window.addEventListener('resize', updateVisibleCities);
         
         return () => {
             window.removeEventListener('resize', updateVisibleCities);
         };
-    }, [currentIndex, albanianCities]);
+    }, [currentIndex]); // Only re-run when currentIndex changes
 
     const handlePrev = () => {
         setSlideDirection('slide-left');
