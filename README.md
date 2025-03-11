@@ -1,6 +1,6 @@
 <h1>Simple Weather App</h1>
 
-<a href="https://react-task-weather-app.vercel.app/"> Link to check it out live </a>
+<a href="https://react-task-weather-app.vercel.app/" target="_blank"> Link to check it out live </a>
 
 <h3>This project is developed for educational purposes with the React Vite Framework and it has the lower listed features.</h3>
 <ul>
