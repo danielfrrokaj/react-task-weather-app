@@ -1,0 +1,49 @@
+.city-data-container {
+  background-color: white;
+  border: 1px solid #2c2929;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  min-height: 120px; /* Ensure consistent height even when loading */
+}
+
+.city-name {
+  color: #333;
+  font-family: 'Poppins', sans-serif;
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.temperature-container {
+  display: flex;
+  align-items: center;
+}
+
+.temperature-text {
+  color: #333;
+  font-family: 'Poppins', sans-serif;
+  font-size: 20px;
+  margin: 0;
+  margin-right: 10px;
+}
+
+.temperature-icon {
+  width: auto;
+  height: auto;
+}
+
+.loading-text {
+  color: #666;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  margin: 10px 0;
+}
+
+.error-text {
+  color: #d9534f;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  margin: 10px 0;
+} 

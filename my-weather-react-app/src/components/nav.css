@@ -106,8 +106,9 @@ nav a:hover {
   
 .carousel-item:hover {
   background-color: rgba(255, 255, 255, 0.6);
-  transform: translateY(-2px) scale(1.05);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  border-radius: 30px;
 }
   
 .carousel-button {
@@ -124,6 +125,7 @@ nav a:hover {
   
 .carousel-button:hover {
   transform: scale(1.1);
+  cursor: pointer;
 }
   
 .carousel-button:focus {

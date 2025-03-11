@@ -3,7 +3,7 @@ import "./nav.css";
 import rightArrow from "../assets/button_icon/right-arrow.png";
 import rightArrowHover from "../assets/button_icon/right-arrow-hover.png";
 
-const Nav = () => {
+const Nav = ({ onCitySelect }) => {
     // List of Albanian cities
     const albanianCities = [
         "Tirana", "Durrës", "Vlorë", "Shkodër", "Elbasan", 
@@ -16,6 +16,7 @@ const Nav = () => {
     const [visibleCities, setVisibleCities] = useState([]);
     const [hoveredButton, setHoveredButton] = useState(null);
     const [slideDirection, setSlideDirection] = useState(null);
+    const [activeCity, setActiveCity] = useState("Tirana");
 
     // Calculate how many cities to show based on screen width
     useEffect(() => {
@@ -70,6 +71,13 @@ const Nav = () => {
         }, 50);
     };
 
+    const handleCityClick = (city) => {
+        setActiveCity(city);
+        if (onCitySelect) {
+            onCitySelect(city);
+        }
+    };
+
     return (
         <nav className="nav">
             <div className="nav-content">
@@ -91,7 +99,8 @@ const Nav = () => {
                         {visibleCities.map((city, index) => (
                             <div 
                                 key={`${city}-${index}`} 
-                                className={`carousel-item ${slideDirection}`}
+                                className={`carousel-item ${slideDirection} ${city === activeCity ? 'active' : ''}`}
+                                onClick={() => handleCityClick(city)}
                             >
                                 {city}
                             </div>

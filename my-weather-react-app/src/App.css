@@ -53,12 +53,15 @@
 
 h1 {
   margin-top: 20px;
-  margin-bottom: 20px;
-  color: #fff; /* Changed to white for better visibility on dark background */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add text shadow for better readability */
+  margin-bottom: 20px; /* Add text shadow for better readability */
   font-size: 2rem;
-  font-weight: bold;
   font-family: 'Poppins', sans-serif;
+}
+
+.city-data-wrapper {
+  max-width: 800px;
+  margin: 30px auto 0;
+  padding: 0 15px;
 }
 
 /* Responsive adjustments */
