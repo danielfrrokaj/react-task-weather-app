@@ -1,0 +1,26 @@
+{
+  "translation": {
+    "searchTitle": "Kerko vendin",
+    "useLocation": "Përdor vendndodhjen",
+    "detecting": "Duke zbuluar...",
+    "locationDenied": "Aksesi i vendndodhjes u refuzua",
+    "locationUnavailable": "Informacioni i vendndodhjes nuk është i disponueshëm",
+    "locationTimeout": "Kërkesa për vendndodhje skadoi",
+    "unknownError": "Ndodhi një gabim i panjohur",
+    "temperature": "Temperatura",
+    "humidity": "Lagështia",
+    "windSpeed": "Shpejtësia e erës",
+    "conditions": "Kushtet",
+    "today": "Sot është",
+    "time": "Ora",
+    "days": {
+      "sunday": "e dielë",
+      "monday": "e hënë",
+      "tuesday": "e martë",
+      "wednesday": "e mërkurë",
+      "thursday": "e enjte",
+      "friday": "e premte",
+      "saturday": "e shtunë"
+    }
+  }
+} 

@@ -1,0 +1,26 @@
+{
+  "translation": {
+    "searchTitle": "Standort suchen",
+    "useLocation": "Standort verwenden",
+    "detecting": "Erkennung...",
+    "locationDenied": "Standortzugriff wurde verweigert",
+    "locationUnavailable": "Standortinformationen sind nicht verfügbar",
+    "locationTimeout": "Standortanfrage ist abgelaufen",
+    "unknownError": "Ein unbekannter Fehler ist aufgetreten",
+    "temperature": "Temperatur",
+    "humidity": "Luftfeuchtigkeit",
+    "windSpeed": "Windgeschwindigkeit",
+    "conditions": "Bedingungen",
+    "today": "Heute ist",
+    "time": "Zeit",
+    "days": {
+      "sunday": "Sonntag",
+      "monday": "Montag",
+      "tuesday": "Dienstag",
+      "wednesday": "Mittwoch",
+      "thursday": "Donnerstag",
+      "friday": "Freitag",
+      "saturday": "Samstag"
+    }
+  }
+} 

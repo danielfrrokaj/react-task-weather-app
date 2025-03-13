@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react"; 
+import React, { useState, useEffect } from "react";
+import { useTranslation } from 'react-i18next';
 
 const TimeData = () => {
+    const { t } = useTranslation();
     const [currentTime, setCurrentTime] = useState(new Date());
 
     useEffect(() => {
@@ -18,7 +20,7 @@ const TimeData = () => {
 
     return (
         <div>
-            <p>Koha aktuale: {currentTime.toLocaleTimeString()}</p> {/* Format the time as needed */}
+            <p>{t('time')}: {currentTime.toLocaleTimeString()}</p>
         </div>
     );
 };

@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import './SearchBar.css';
 import { ALBANIAN_CITIES } from '../utils/weatherApi';
 
 const SearchBar = ({ onCitySelect, selectedCity = 'Tirana' }) => {
+    const { t } = useTranslation();
     const [searchTerm, setSearchTerm] = useState('');
     const [suggestions, setSuggestions] = useState([]);
     const [showSuggestions, setShowSuggestions] = useState(false);
@@ -43,11 +45,11 @@ const SearchBar = ({ onCitySelect, selectedCity = 'Tirana' }) => {
     };
 
     // Create a placeholder text that includes the selected city
-    const placeholderText = `${selectedCity}, Shqipëri`;
+    const placeholderText = `${selectedCity}`;
 
     return (
         <div className="search-container">
-            <p className="search-title">Kerko vendin</p>
+            <p className="search-title">{t('searchTitle')}</p>
             <form onSubmit={handleSearch} className="search-form">
                 <input
                     type="text"

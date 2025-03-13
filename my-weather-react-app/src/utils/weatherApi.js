@@ -29,23 +29,50 @@ export const fetchWeatherData = async (city) => {
  * European capital cities list
  */
 export const EUROPEAN_CAPITALS = [
-  'Tirana',
-  'Paris',
-  'London',
-  'Berlin',
-  'Rome',
-  'Madrid',
-  'Lisbon',
-  'Amsterdam',
-  'Brussels',
-  'Vienna',
-  'Athens',
-  'Warsaw',
-  'Prague',
-  'Budapest',
-  'Dublin',
-  'Stockholm',
-  'Copenhagen',
-  'Helsinki',
-  'Oslo'
-]; 
+  'Tirana',      // Albania
+  'Amsterdam',   // Netherlands
+  'Andorra la Vella', // Andorra
+  'Athens',      // Greece
+  'Belgrade',    // Serbia
+  'Berlin',      // Germany
+  'Bern',        // Switzerland
+  'Bratislava',  // Slovakia
+  'Brussels',    // Belgium
+  'Bucharest',   // Romania
+  'Budapest',    // Hungary
+  'Chisinau',    // Moldova
+  'Copenhagen',  // Denmark
+  'Dublin',      // Ireland
+  'Helsinki',    // Finland
+  'Kyiv',        // Ukraine
+  'Lisbon',      // Portugal
+  'Ljubljana',   // Slovenia
+  'London',      // United Kingdom
+  'Luxembourg',  // Luxembourg
+  'Madrid',      // Spain
+  'Minsk',       // Belarus
+  'Monaco',      // Monaco
+  'Moscow',      // Russia
+  'Oslo',        // Norway
+  'Paris',       // France
+  'Podgorica',   // Montenegro
+  'Prague',      // Czech Republic
+  'Reykjavik',   // Iceland
+  'Riga',        // Latvia
+  'Rome',        // Italy
+  'San Marino',  // San Marino
+  'Sarajevo',    // Bosnia and Herzegovina
+  'Skopje',      // North Macedonia
+  'Sofia',       // Bulgaria
+  'Stockholm',   // Sweden
+  'Tallinn',     // Estonia
+  'Valletta',    // Malta
+  'Vatican City', // Vatican City
+  'Vienna',      // Austria
+  'Vilnius',     // Lithuania
+  'Warsaw',      // Poland
+  'Zagreb'       // Croatia
+];
+
+// For backward compatibility
+export const ALBANIAN_CITIES = EUROPEAN_CAPITALS; 

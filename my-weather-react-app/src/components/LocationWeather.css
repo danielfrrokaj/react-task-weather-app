@@ -1,0 +1,124 @@
+.location-weather {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.location-button {
+  background-color: transparent;
+  color: #333;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  padding: 0;
+  overflow: hidden;
+}
+
+.location-button:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+  transform: scale(1.05);
+}
+
+.location-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.location-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0;
+}
+
+.location-text {
+  margin-left: 5px;
+  font-size: 12px;
+  display: none; /* Hide by default, show on larger screens */
+  white-space: nowrap;
+}
+
+.location-tooltip {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff;
+  color: #333;
+  padding: 5px 10px;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 100;
+  white-space: nowrap;
+  margin-top: 5px;
+  width: max-content;
+  max-width: 200px;
+}
+
+.location-tooltip:before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  right: 15px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid #fff;
+}
+
+.location-error {
+  color: #e74c3c;
+  font-size: 12px;
+  text-align: center;
+  margin: 0;
+}
+
+.location-success {
+  color: #2ecc71;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 5px;
+}
+
+/* Responsive styles */
+@media (min-width: 768px) {
+  .location-button {
+    width: auto;
+    border-radius: 18px;
+    padding: 0 12px;
+  }
+  
+  .location-icon {
+    margin-right: 2px;
+  }
+  
+  .location-text {
+    display: inline;
+  }
+}
+
+@media (max-width: 480px) {
+  .location-button {
+    width: auto;
+    height: 32px;
+    font-size: 12px;
+    border-radius: 16px;
+    padding: 0 10px;
+  }
+  
+  .location-icon {
+    margin-right: 2px;
+  }
+  
+  .location-text {
+    display: inline;
+    font-size: 11px;
+  }
+} 

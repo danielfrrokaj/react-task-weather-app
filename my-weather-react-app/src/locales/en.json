@@ -1,0 +1,26 @@
+{
+  "translation": {
+    "searchTitle": "Search location",
+    "useLocation": "Use Location",
+    "detecting": "Detecting...",
+    "locationDenied": "Location access was denied",
+    "locationUnavailable": "Location information is unavailable",
+    "locationTimeout": "Location request timed out",
+    "unknownError": "An unknown error occurred",
+    "temperature": "Temperature",
+    "humidity": "Humidity",
+    "windSpeed": "Wind Speed",
+    "conditions": "Conditions",
+    "today": "Today is",
+    "time": "Time",
+    "days": {
+      "sunday": "Sunday",
+      "monday": "Monday",
+      "tuesday": "Tuesday",
+      "wednesday": "Wednesday",
+      "thursday": "Thursday",
+      "friday": "Friday",
+      "saturday": "Saturday"
+    }
+  }
+} 

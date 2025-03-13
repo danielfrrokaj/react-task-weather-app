@@ -1,47 +1,187 @@
+/* Container styles */
+.weather-features-container {
+  width: 100%;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
 .weather-features {
-  display: flex;
-  flex-wrap: wrap; /* Allow wrapping for responsiveness */
-  margin: 20px 0;
-  gap: 20px; /* Add gap between columns */
-  padding-left: 5%;
-  padding-bottom: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.column {
-  flex: 1 1 50%; /* Each column takes 50% of the width */
-  box-sizing: border-box;
+/* Card styles */
+.weather-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.weather-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 16px;
+  padding: 2px;
+  background: linear-gradient(
+    var(--gradient-angle, 45deg),
+    var(--gradient-start),
+    var(--gradient-end)
+  );
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0.5;
+}
+
+.weather-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Theme colors */
+.theme-temperature {
+  --gradient-start: #FF6B6B;
+  --gradient-end: #FFE66D;
+  background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 230, 109, 0.1));
+}
+
+.theme-humidity {
+  --gradient-start: #4ECDC4;
+  --gradient-end: #556270;
+  background: linear-gradient(135deg, rgba(78, 205, 196, 0.1), rgba(85, 98, 112, 0.1));
+}
+
+.theme-wind {
+  --gradient-start: #6C5B7B;
+  --gradient-end: #C06C84;
+  background: linear-gradient(135deg, rgba(108, 91, 123, 0.1), rgba(192, 108, 132, 0.1));
+}
+
+.theme-conditions {
+  --gradient-start: #45B7D1;
+  --gradient-end: #2C3E50;
+  background: linear-gradient(135deg, rgba(69, 183, 209, 0.1), rgba(44, 62, 80, 0.1));
+}
+
+/* Feature styles */
 .weather-feature {
   display: flex;
-  justify-content: space-between; /* Space between label and value */
-  padding: 10px; /* Add some padding for spacing */
-  position: relative; /* Position relative for the :after pseudo-element */
+  align-items: center;
+  gap: 1.25rem;
+  position: relative;
+  z-index: 1;
 }
 
-.weather-feature-label {
-  font-weight: bold; /* Make the label bold */
+.feature-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 14px;
+  font-size: 1.5rem;
+  color: var(--gradient-start);
+  transition: all 0.3s ease;
 }
 
-.weather-feature-value {
-  text-align: right; /* Align the value to the right */
+.weather-card:hover .feature-icon {
+  background: rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
 }
 
-/* Add a bottom border using :after */
-.weather-feature:after {
-  content: ''; /* Required for the pseudo-element */
-  display: block; /* Make it a block element */
-  width: 100%; /* Full width */
-  height: 1px; /* Height of the border */
-  background-color: darkgray; /* Color of the border */
-  position: absolute; /* Position it at the bottom */
-  left: 0; /* Align to the left */
-  bottom: 0; /* Align to the bottom */
+.feature-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+
+.feature-label {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.feature-value {
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Loading state */
+.weather-features-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 3rem;
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.weather-features-loading svg {
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 /* Responsive adjustments */
-@media (max-width: 600px) {
-  .column {
-    flex: 1 1 100%; /* Stack columns on mobile */
+@media (max-width: 768px) {
+  .weather-features-container {
+    padding: 1rem;
+  }
+
+  .weather-features {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .weather-card {
+    padding: 1.25rem;
+  }
+
+  .feature-icon {
+    width: 45px;
+    height: 45px;
+    font-size: 1.25rem;
+  }
+
+  .feature-label {
+    font-size: 0.75rem;
+  }
+
+  .feature-value {
+    font-size: 1.125rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .weather-features {
+    grid-template-columns: 1fr;
+  }
+
+  .weather-card {
+    padding: 1rem;
   }
 } 

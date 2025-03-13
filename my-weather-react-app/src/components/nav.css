@@ -13,6 +13,17 @@ nav {
   align-items: center;
   max-width: 1200px;
   margin: 0 auto;
+  width: 100%;
+}
+
+.nav-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 15px;
+  position: relative; /* For absolute positioning of children */
+  min-height: 60px; /* Ensure minimum height for the navbar */
 }
   
 nav ul {
@@ -20,7 +31,6 @@ nav ul {
   list-style: none;
   margin: 0;
   padding: 0;
- 
 }
   
 nav li {
@@ -38,16 +48,28 @@ nav a:hover {
   text-decoration: underline;
   color: #fff;
 }
+
+.nav-actions {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+}
   
 /* Carousel styles */
 .carousel-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  max-width: 600px;
   margin: 0 auto;
+  max-width: 600px;
   padding: 10px 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1; /* Ensure it's below the location icon for mobile */
 }
   
 .carousel {
@@ -67,33 +89,6 @@ nav a:hover {
   white-space: nowrap;
   text-align: center;
   max-width: 300px;
-  transition: all 0.3s ease;
-  position: relative;
-}
-
-/* Active city styling with overlay background and radius borders */
-.carousel-item.active {
-  background-color: rgba(255, 255, 255, 0.3);
-  border-radius: 30px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  font-weight: bold;
-  color: #fff;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-  transform: translateY(-2px);
-  padding: 8px 20px;
-}
-
-/* Add a subtle indicator under the active city */
-.carousel-item.active::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 30%;
-  height: 2px;
-  background-color: #fff;
-  border-radius: 2px;
 }
   
 /* Animation for items entering from right */
@@ -136,9 +131,10 @@ nav a:hover {
   border-radius: 30px;
 }
 
-/* Ensure active state takes precedence over hover */
-.carousel-item.active:hover {
-  background-color: rgba(255, 255, 255, 0.4);
+.carousel-item.active {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 30px;
+  font-weight: bold;
 }
   
 .carousel-button {
@@ -179,18 +175,35 @@ nav a:hover {
     flex-direction: column;
   }
   
-  nav ul {
-    margin-bottom: 15px;
+  .nav-wrapper {
+    height: 100px; /* Fixed height for mobile to accommodate stacked elements */
   }
   
   .carousel-container {
+    position: relative;
+    left: auto;
+    transform: none;
     width: 100%;
+    margin-top: 40px; /* Push down to make room for the location icon */
+  }
+  
+  .nav-actions {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    transform: none;
+    z-index: 2; /* Ensure it's above the carousel on mobile */
   }
 }
   
 @media (max-width: 480px) {
   .carousel-item {
     min-width: 80px;
+    padding: 8px 12px;
+  }
+  
+  .nav-wrapper {
+    padding: 0 10px;
   }
 }
   
