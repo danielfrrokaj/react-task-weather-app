@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import Nav from './components/nav'
 import SearchBar from './components/SearchBar'
-import LocalTime from './components/LocalTime'
+import LocalTime from './components/LocalTime/LocalTime'
 import CityData from './components/CityData'
 import WeatherFeatures from './components/WeatherFeatures'
 import Footer from './components/Footer'
@@ -52,7 +52,7 @@ function App() {
         </div>
         
         <div className="city-data-wrapper">
-          <div className="flex-item">
+          <div className="city-data-container">
             <CityData cityName={selectedCity} />
           </div>
           <div className="weather-features">

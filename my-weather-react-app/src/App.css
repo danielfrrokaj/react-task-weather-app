@@ -154,6 +154,25 @@ h1 {
   box-shadow: var(--shadow-lg);
 }
 
+.city-data-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: var(--space-md);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(var(--blur-sm));
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.city-data-container:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
 /* Location container styles */
 .location-container {
   display: flex;
