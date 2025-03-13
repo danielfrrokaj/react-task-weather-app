@@ -140,7 +140,6 @@ h1 {
 }
 
 .city-data-container {
-  display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
@@ -162,8 +161,8 @@ h1 {
 
 .city-data-container:hover {
   background: rgba(255, 255, 255, 0.08);
-  transform: translateY(-2px);
   box-shadow: var(--shadow-md);
+  border-radius: 10px;
 }
 
 /* Location container styles */
