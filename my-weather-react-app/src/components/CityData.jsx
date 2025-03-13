@@ -14,8 +14,8 @@ const CityData = ({ cityName = 'Tirana' }) => {
                 setLoading(true);
                 setError(null);
                 
-                // Add "Albania" to ensure we get the right city
-                const locationQuery = `${cityName}, Albania`;
+                // Use the city name directly as the location query
+                const locationQuery = cityName;
                 
                 const data = await fetchWeatherData(locationQuery);
                 setWeatherData(data);

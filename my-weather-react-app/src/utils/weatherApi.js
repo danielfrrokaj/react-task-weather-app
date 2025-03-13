@@ -26,22 +26,26 @@ export const fetchWeatherData = async (city) => {
 };
 
 /**
- * Albanian cities list
+ * European capital cities list
  */
-export const ALBANIAN_CITIES = [
+export const EUROPEAN_CAPITALS = [
   'Tirana',
-  'Durrës',
-  'Vlorë',
-  'Shkodër',
-  'Elbasan',
-  'Fier',
-  'Korçë',
-  'Berat',
-  'Lushnjë',
-  'Pogradec',
-  'Kavajë',
-  'Gjirokastër',
-  'Sarandë',
-  'Peshkopi',
-  'Kukës'
+  'Paris',
+  'London',
+  'Berlin',
+  'Rome',
+  'Madrid',
+  'Lisbon',
+  'Amsterdam',
+  'Brussels',
+  'Vienna',
+  'Athens',
+  'Warsaw',
+  'Prague',
+  'Budapest',
+  'Dublin',
+  'Stockholm',
+  'Copenhagen',
+  'Helsinki',
+  'Oslo'
 ]; 

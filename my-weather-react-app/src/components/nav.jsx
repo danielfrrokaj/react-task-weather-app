@@ -2,21 +2,29 @@ import { useState, useRef, useEffect } from "react";
 import "./nav.css";
 import rightArrow from "../assets/button_icon/right-arrow.png";
 import rightArrowHover from "../assets/button_icon/right-arrow-hover.png";
+import { EUROPEAN_CAPITALS } from "../utils/weatherApi";
 
-const Nav = ({ onCitySelect }) => {
-    // List of Albanian cities
-    const albanianCities = [
-        "Tirana", "Durrës", "Vlorë", "Shkodër", "Elbasan", 
-        "Fier", "Korçë", "Berat", "Lushnjë", "Pogradec", 
-        "Kavajë", "Gjirokastër", "Sarandë", "Peshkopi", "Kukës"
-    ];
+const Nav = ({ onCitySelect, selectedCity = "Tirana" }) => {
+    // List of European capital cities
+    const europeanCapitals = EUROPEAN_CAPITALS;
 
     const [currentIndex, setCurrentIndex] = useState(0);
     const carouselRef = useRef(null);
     const [visibleCities, setVisibleCities] = useState([]);
     const [hoveredButton, setHoveredButton] = useState(null);
     const [slideDirection, setSlideDirection] = useState(null);
-    const [activeCity, setActiveCity] = useState("Tirana");
+    const [activeCity, setActiveCity] = useState(selectedCity);
+
+    // Update active city when selectedCity prop changes
+    useEffect(() => {
+        setActiveCity(selectedCity);
+        
+        // Find the index of the selected city and update the carousel position
+        const cityIndex = europeanCapitals.findIndex(city => city === selectedCity);
+        if (cityIndex !== -1) {
+            setCurrentIndex(cityIndex);
+        }
+    }, [selectedCity]);
 
     // Calculate how many cities to show based on screen width
     const updateVisibleCities = () => {
@@ -32,8 +40,8 @@ const Nav = ({ onCitySelect }) => {
         
         const cities = [];
         for (let i = 0; i < visibleCount; i++) {
-            const index = (currentIndex + i) % albanianCities.length;
-            cities.push(albanianCities[index]);
+            const index = (currentIndex + i) % europeanCapitals.length;
+            cities.push(europeanCapitals[index]);
         }
         setVisibleCities(cities);
     };
@@ -50,9 +58,17 @@ const Nav = ({ onCitySelect }) => {
     const handlePrev = () => {
         setSlideDirection('slide-left');
         setTimeout(() => {
-            setCurrentIndex((prevIndex) => 
-                prevIndex === 0 ? albanianCities.length - 1 : prevIndex - 1
-            );
+            // Get the previous city in the list
+            const prevIndex = currentIndex === 0 ? europeanCapitals.length - 1 : currentIndex - 1;
+            setCurrentIndex(prevIndex);
+            
+            // Set the active city to the first visible city after navigation
+            const newActiveCity = europeanCapitals[prevIndex];
+            setActiveCity(newActiveCity);
+            if (onCitySelect) {
+                onCitySelect(newActiveCity);
+            }
+            
             setTimeout(() => setSlideDirection(null), 50);
         }, 50);
     };
@@ -60,9 +76,17 @@ const Nav = ({ onCitySelect }) => {
     const handleNext = () => {
         setSlideDirection('slide-right');
         setTimeout(() => {
-            setCurrentIndex((prevIndex) => 
-                (prevIndex + 1) % albanianCities.length
-            );
+            // Get the next city in the list
+            const nextIndex = (currentIndex + 1) % europeanCapitals.length;
+            setCurrentIndex(nextIndex);
+            
+            // Set the active city to the first visible city after navigation
+            const newActiveCity = europeanCapitals[nextIndex];
+            setActiveCity(newActiveCity);
+            if (onCitySelect) {
+                onCitySelect(newActiveCity);
+            }
+            
             setTimeout(() => setSlideDirection(null), 50);
         }, 50);
     };
