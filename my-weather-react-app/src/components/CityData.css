@@ -1,19 +1,14 @@
 .city-data {
   padding: var(--space-xl);
-  background: var(--gradient-primary);
-  backdrop-filter: blur(var(--blur-md));
   border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: var(--shadow-lg);
   width: 100%;
   max-width: 600px;
   position: relative;
-  overflow: hidden;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-lg);
+  gap: var(--space-xl);
 }
 
 .city-data::before {
@@ -39,11 +34,47 @@
 
 .city-name {
   font-size: var(--font-size-2xl);
-  font-weight: 600;
+  font-weight: 700;
   color: var(--primary-light);
   margin: 0;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.temperature-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
   position: relative;
+  padding: var(--space-md) 0;
+}
+
+.temperature-text {
+  color: var(--primary-light);
+  font-family: 'Poppins', sans-serif;
+  font-size: 4rem;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1;
+}
+
+.temperature-icon {
+  width: 40px;
+  height: 40px;
+  margin-top: -20px;
+}
+
+.info-text {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: var(--font-size-md);
+  color: var(--primary-light);
+  opacity: 0.9;
+  white-space: nowrap;
+  text-align: center;
+  width: 100%;
 }
 
 .city-info {
@@ -51,7 +82,7 @@
   flex-direction: column;
   gap: var(--space-md);
   width: 100%;
-  margin: 0;
+  margin-top: var(--space-xl);
 }
 
 .info-item {
@@ -59,11 +90,9 @@
   flex-direction: column;
   align-items: center;
   gap: var(--space-xs);
-  padding: var(--space-md);
-  background: rgba(255, 255, 255, 0.05);
+  padding: var(--space-sm);
   border-radius: var(--radius-md);
-  transition: all 0.3s ease;
-  width: 100%;
+  transition: transform 0.3s ease;
 }
 
 .info-item:hover {
@@ -77,33 +106,12 @@
   opacity: 0.7;
   text-transform: uppercase;
   letter-spacing: 1px;
-  margin-bottom: var(--space-xs);
 }
 
 .info-value {
   font-size: var(--font-size-xl);
   color: var(--primary-light);
   font-weight: 600;
-}
-
-.temperature-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--space-sm);
-  margin: 0;
-  padding: var(--space-md);
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: var(--radius-md);
-  backdrop-filter: blur(var(--blur-sm));
-}
-
-.temperature-text {
-  color: var(--primary-light);
-  font-family: 'Poppins', sans-serif;
-  font-size: var(--font-size-2xl);
-  font-weight: 600;
-  margin: 0;
 }
 
 .loading-text, .error-text {
@@ -124,38 +132,29 @@
 @media (max-width: 768px) {
   .city-data {
     padding: var(--space-lg);
+    gap: var(--space-lg);
   }
 
   .city-name {
     font-size: var(--font-size-xl);
-    margin-bottom: var(--space-md);
-  }
-
-  .city-info {
-    grid-template-columns: 1fr;
-    gap: var(--space-md);
-    margin-top: var(--space-lg);
-  }
-
-  .info-value {
-    font-size: var(--font-size-lg);
   }
 
   .temperature-text {
-    font-size: var(--font-size-xl);
+    font-size: 3rem;
   }
-}
 
-.info-text {
-  display: block;
-  position: absolute;
-  padding-top: var(--space-xl);
-  font-size: var(--font-size-sm);
-  color: var(--primary-light);
-  opacity: 0.8;
-}
+  .temperature-icon {
+    width: 30px;
+    height: 30px;
+    margin-top: -15px;
+  }
 
-.temperature-icon {
-  width: auto;
-  height: auto;
+  .info-text {
+    bottom: -25px;
+    font-size: var(--font-size-sm);
+  }
+
+  .city-info {
+    margin-top: var(--space-lg);
+  }
 } 

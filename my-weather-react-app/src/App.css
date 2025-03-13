@@ -139,32 +139,25 @@ h1 {
   }
 }
 
+.city-data-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: var(--space-xl) var(--space-md);
+  position: relative;
+}
+
 .city-data-wrapper {
   display: flex;
   flex-direction: column;
   max-width: 770px;
   margin: calc(var(--space-xl) * 2) auto;
   gap: var(--space-xl);
-  height: auto;
   padding: var(--space-xl);
-  background: var(--gradient-primary);
-  backdrop-filter: blur(var(--blur-md));
   border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: var(--shadow-lg);
-}
-
-.city-data-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  padding: var(--space-md);
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(var(--blur-sm));
-  border-radius: var(--radius-lg);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
 }
 
 .city-data-container:hover {
