@@ -2,56 +2,15 @@ import { useState, useEffect } from 'react';
 import { CAPITAL_CITIES, getWeatherForCity } from '../services/weatherService';
 import { cityBackgrounds, defaultBackground } from '../config/cityBackgrounds';
 import WeatherDetails from './WeatherDetails';
-
-const AIRecommendButton = () => (
-    <button 
-        className="group relative w-full p-4 bg-gradient-to-r from-blue-500/80 to-purple-600/80 rounded-xl overflow-hidden backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:from-blue-500/90 hover:to-purple-600/90 shadow-lg hover:shadow-xl"
-        onClick={() => console.log('AI Recommendations clicked')}
-    >
-        <div className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        <div className="relative flex items-center justify-center gap-3">
-            {/* AI Icon */}
-            <svg 
-                className="w-6 h-6 text-white/90" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-            >
-                <path 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
-                    strokeWidth={2} 
-                    d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                />
-            </svg>
-            <span className="text-lg font-semibold text-white/90 group-hover:text-white transition-colors">
-                AI Recommendations for Today
-            </span>
-            {/* Sparkle Icon */}
-            <svg 
-                className="w-5 h-5 text-white/75 group-hover:text-white/90 transition-colors" 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24"
-            >
-                <path 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
-                    strokeWidth={2} 
-                    d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
-                />
-            </svg>
-        </div>
-        {/* Animated Gradient Border */}
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 opacity-50 blur-xl group-hover:opacity-75 transition-opacity animate-gradient-x" />
-    </button>
-);
+import AIRecommendButton from './AIRecommendButton';
+import AIRecommendations from './AIRecommendations';
 
 const WeatherCard = ({ selectedCountry, initialCity }) => {
     const [currentCityIndex, setCurrentCityIndex] = useState(0);
     const [weatherData, setWeatherData] = useState(null);
     const [touchStart, setTouchStart] = useState(0);
     const [touchEnd, setTouchEnd] = useState(0);
+    const [showRecommendations, setShowRecommendations] = useState(false);
 
     // Filter cities based on selected country
     const countryCities = CAPITAL_CITIES.filter(city => city.country === selectedCountry);
@@ -130,7 +89,7 @@ const WeatherCard = ({ selectedCountry, initialCity }) => {
     const backgroundImage = cityBackgrounds[currentCity] || defaultBackground;
 
     return (
-        <>
+        <div className="flex flex-col items-center justify-center min-h-screen w-full px-4 py-8">
             <div className="relative w-full max-w-[800px] mx-auto">
                 <div 
                     className="relative h-[400px] rounded-xl overflow-hidden shadow-xl"
@@ -197,11 +156,12 @@ const WeatherCard = ({ selectedCountry, initialCity }) => {
                 </div>
                 {/* AI Recommendations Button */}
                 <div className="mt-6 mb-8">
-                    <AIRecommendButton />
+                    <AIRecommendButton onClick={() => setShowRecommendations(!showRecommendations)} />
                 </div>
             </div>
+            <AIRecommendations weatherData={weatherData} isVisible={showRecommendations} />
             <WeatherDetails weatherData={weatherData} />
-        </>
+        </div>
     );
 };
 
