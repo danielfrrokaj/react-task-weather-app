@@ -8,8 +8,8 @@ const Header = ({ selectedCountry, onCountryChange }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
     return (
-        <header className="max-w-[800px] mx-auto mb-8 text-center relative">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-2 drop-shadow-lg">
+        <header className="max-w-[800px] mx-auto mb-8 text-center relative pt-[60px] md:pt-0">
+            <h1 className="text-4xl md:text-5xl font-bold text-white mb-2 drop-shadow-lg ">
                 Weather in{' '}
                 <button
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}

@@ -11,7 +11,7 @@ export const cityBackgrounds = {
     'Pogradec': 'https://eia476h758b.exactdn.com/wp-content/uploads/2023/04/Pogradec-scaled.jpeg?strip=all&lossy=1&ssl=1',
     'Kavajë': 'https://mim-img0.cctv.cn/images/zhycms_albanian/20210125/9e673985-501f-4388-997c-7bf10396d29b.jpg?x-oss-process=image/resize,w_650',
     'Gjirokastër': 'https://thelavendertravelers.com/wp-content/uploads/2024/08/gjirokaster-5-scaled.webp',
-    'Lezhë': 'https://img1.oastatic.com/img2/95823142/600x300c/variant.jpg',
+    'Lezhe': 'https://img1.oastatic.com/img2/95823142/600x300c/variant.jpg',
     'Kuçovë': 'https://ata.gov.al/wp-content/uploads/2022/08/Screenshot_5-3.jpg',
     
     'London': 'https://images.unsplash.com/photo-1513635269975-59663e0ac1ad',

@@ -16,7 +16,7 @@ export const CAPITAL_CITIES = [
     { city: 'Pogradec', country: 'Albania' },
     { city: 'Kavajë', country: 'Albania' },
     { city: 'Gjirokastër', country: 'Albania' },
-    { city: 'Lezhë', country: 'Albania' },
+    { city: 'Lezhe', country: 'Albania' },
     { city: 'Kuçovë', country: 'Albania' },
     // European Capitals
     { city: 'London', country: 'United Kingdom' },
