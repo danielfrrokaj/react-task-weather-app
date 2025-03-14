@@ -1,4 +1,14 @@
 @import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body {
+  background-color: black;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
 
 
 
