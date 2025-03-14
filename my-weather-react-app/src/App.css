@@ -51,6 +51,13 @@
   flex-direction: column;
   justify-content: flex-end;
   position: relative;
+  padding: 1.5rem 0;
+}
+
+.flex-item.ai-button-container {
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
 }
 
 .flex-item:first-child {
@@ -124,6 +131,45 @@ h1 {
   padding: var(--space-xl) var(--space-md);
   position: relative;
   z-index: 1;
+  color: #ffffff;
+}
+
+.city-data-container h1,
+.city-data-container h2,
+.city-data-container h3,
+.city-data-container p {
+  color: #ffffff;
+}
+
+.country-name {
+  font-size: 1.2rem;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.city-name {
+  font-size: 2.5rem;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.temperature-text {
+  font-size: 3rem;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.info-text {
+  font-size: 1.2rem;
+  color: #ffffff;
+  margin-top: 0.5rem;
+}
+
+.loading-text, .error-text {
+  color: #ffffff;
+  font-size: 1.2rem;
 }
 
 .city-data-wrapper {
@@ -138,6 +184,9 @@ h1 {
   max-width: 800px;
   margin-left: auto;
   margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 
@@ -156,4 +205,35 @@ h1 {
   border-radius: var(--radius-lg);
   border: 1px solid rgba(255, 255, 255, 0.1);
   position: relative;
+}
+
+.ai-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: var(--glass-background);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+  box-shadow: var(--glass-shadow);
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.ai-button:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.ai-icon {
+  font-size: 1.2rem;
+  color: #ffffff;
 }

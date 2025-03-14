@@ -65,7 +65,7 @@ const LocationWeather = ({ onCitySelect }) => {
     return nearestCapital;
   };
   
-  const getLocation = () => {
+  const handleLocationClick = () => {
     if (!navigator.geolocation) {
       setLocationStatus('error');
       setErrorMessage(t('locationUnavailable'));
@@ -113,23 +113,26 @@ const LocationWeather = ({ onCitySelect }) => {
       },
       (error) => {
         setLocationStatus('error');
-        setErrorMessage(getGeolocationErrorMessage(error));
+        switch (error.code) {
+          case error.PERMISSION_DENIED:
+            setErrorMessage(t('locationDenied'));
+            break;
+          case error.POSITION_UNAVAILABLE:
+            setErrorMessage(t('locationUnavailable'));
+            break;
+          case error.TIMEOUT:
+            setErrorMessage(t('locationTimeout'));
+            break;
+          default:
+            setErrorMessage(t('unknownError'));
+        }
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
       }
     );
-  };
-  
-  // Helper function to get a user-friendly error message
-  const getGeolocationErrorMessage = (error) => {
-    switch (error.code) {
-      case error.PERMISSION_DENIED:
-        return t('locationDenied');
-      case error.POSITION_UNAVAILABLE:
-        return t('locationUnavailable');
-      case error.TIMEOUT:
-        return t('locationTimeout');
-      default:
-        return t('unknownError');
-    }
   };
   
   // Render different icons based on status
@@ -149,7 +152,7 @@ const LocationWeather = ({ onCitySelect }) => {
   return (
     <div className="location-weather">
       <button 
-        onClick={getLocation}
+        onClick={handleLocationClick}
         disabled={locationStatus === 'loading'}
         className="location-button"
         title={t('useLocation')}

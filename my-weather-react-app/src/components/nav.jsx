@@ -6,6 +6,20 @@ import rightArrowHover from "../assets/button_icon/right-arrow-hover.png";
 import { EUROPEAN_CAPITALS } from "../utils/weatherApi";
 import LocationWeather from "./LocationWeather";
 
+// Helper function to get next city
+export const getNextCity = (currentCity) => {
+    const currentIndex = EUROPEAN_CAPITALS.indexOf(currentCity);
+    return EUROPEAN_CAPITALS[(currentIndex + 1) % EUROPEAN_CAPITALS.length];
+};
+
+// Helper function to get previous city
+export const getPrevCity = (currentCity) => {
+    const currentIndex = EUROPEAN_CAPITALS.indexOf(currentCity);
+    return currentIndex === 0 
+        ? EUROPEAN_CAPITALS[EUROPEAN_CAPITALS.length - 1] 
+        : EUROPEAN_CAPITALS[currentIndex - 1];
+};
+
 const Nav = ({ onCitySelect }) => {
     const { t } = useTranslation();
     // List of European capital cities

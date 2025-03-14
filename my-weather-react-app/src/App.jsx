@@ -1,13 +1,15 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import Nav from './components/nav'
 import SearchBar from './components/SearchBar'
-import LocalTime from './components/LocalTime/LocalTime'
 import CityData from './components/CityData'
 import WeatherFeatures from './components/WeatherFeatures'
 import Footer from './components/Footer'
-import defaultBackground from './assets/background.jpg'
 import { fetchWeatherData } from './utils/weatherApi'
 import './App.css'
+import LocationWeather from './components/LocationWeather'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBrain } from '@fortawesome/free-solid-svg-icons'
+import defaultBackground from './assets/background.jpg'
 
 function App() {
   const [selectedCity, setSelectedCity] = useState('Tirana');
@@ -85,7 +87,7 @@ function App() {
       backgroundPosition: 'center',
       backgroundRepeat: 'no-repeat'
     }}>
-      <Nav onCitySelect={handleCitySelect} />
+      <Nav selectedCity={selectedCity} onCitySelect={handleCitySelect} />
       <main className="main-content">
         <div className="flex-container">
           <div className="flex-item glass-card">
@@ -94,14 +96,18 @@ function App() {
               selectedCity={selectedCity}
             />
           </div>
-          <div className="flex-item glass-card">
-            <LocalTime />
+        
+          <div className="flex-item glass-card ai-button-container">
+            <button className="ai-button">
+              <FontAwesomeIcon icon={faBrain} className="ai-icon" />
+              <span>Get AI Recommandations</span>
+            </button>
           </div>
         </div>
         
         <div className="city-data-wrapper">
           <div className="city-data-container">
-            <CityData cityName={selectedCity} />
+            <CityData cityName={selectedCity} onCitySelect={handleCitySelect} />
           </div>
           <div className="weather-features">
             <WeatherFeatures weatherData={weatherData} />
