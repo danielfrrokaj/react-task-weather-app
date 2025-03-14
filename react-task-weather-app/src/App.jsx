@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import './App.css'
 import WeatherCard from './components/WeatherCard'
 
 function App() {
