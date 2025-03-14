@@ -14,7 +14,8 @@ const calculateDistance = (lat1, lon1, lat2, lon2) => {
     return R * c;
 };
 
-const ALBANIAN_CITIES_COORDS = {
+const CITIES_COORDS = {
+    // Albanian Cities
     'Tirana': { lat: 41.3275, lon: 19.8187 },
     'Durrës': { lat: 41.3233, lon: 19.4562 },
     'Vlorë': { lat: 40.4667, lon: 19.4833 },
@@ -27,27 +28,48 @@ const ALBANIAN_CITIES_COORDS = {
     'Pogradec': { lat: 40.9025, lon: 20.6525 },
     'Kavajë': { lat: 41.1856, lon: 19.5569 },
     'Gjirokastër': { lat: 40.0758, lon: 20.1389 },
-    'Lezhë': { lat: 41.7836, lon: 19.6436 },
-    'Kuçovë': { lat: 40.8003, lon: 19.9167 }
+    'Lezhe': { lat: 41.7836, lon: 19.6436 },
+    'Kuçovë': { lat: 40.8003, lon: 19.9167 },
+    // European Capitals
+    'London': { lat: 51.5074, lon: -0.1278 },
+    'Paris': { lat: 48.8566, lon: 2.3522 },
+    'Berlin': { lat: 52.5200, lon: 13.4050 },
+    'Rome': { lat: 41.9028, lon: 12.4964 },
+    'Madrid': { lat: 40.4168, lon: -3.7038 },
+    'Amsterdam': { lat: 52.3676, lon: 4.9041 },
+    'Brussels': { lat: 50.8503, lon: 4.3517 },
+    'Vienna': { lat: 48.2082, lon: 16.3738 },
+    'Stockholm': { lat: 59.3293, lon: 18.0686 },
+    'Oslo': { lat: 59.9139, lon: 10.7522 },
+    'Copenhagen': { lat: 55.6761, lon: 12.5683 },
+    'Helsinki': { lat: 60.1699, lon: 24.9384 },
+    'Dublin': { lat: 53.3498, lon: -6.2603 },
+    'Lisbon': { lat: 38.7223, lon: -9.1393 }
 };
 
 const LocationButton = ({ onLocationFound }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const findNearestAlbanianCity = (userLat, userLon) => {
+    const findNearestCity = (userLat, userLon) => {
         let nearestCity = null;
         let shortestDistance = Infinity;
+        let nearestCityCountry = null;
 
-        Object.entries(ALBANIAN_CITIES_COORDS).forEach(([city, coords]) => {
+        Object.entries(CITIES_COORDS).forEach(([city, coords]) => {
             const distance = calculateDistance(userLat, userLon, coords.lat, coords.lon);
             if (distance < shortestDistance) {
                 shortestDistance = distance;
                 nearestCity = city;
+                // Find the country for this city
+                const cityInfo = CAPITAL_CITIES.find(c => c.city === city);
+                if (cityInfo) {
+                    nearestCityCountry = cityInfo.country;
+                }
             }
         });
 
-        return nearestCity;
+        return { city: nearestCity, distance: shortestDistance, country: nearestCityCountry };
     };
 
     const handleLocationClick = () => {
@@ -64,25 +86,17 @@ const LocationButton = ({ onLocationFound }) => {
             async (position) => {
                 try {
                     const { latitude, longitude } = position.coords;
-                    const nearestCity = findNearestAlbanianCity(latitude, longitude);
+                    const nearest = findNearestCity(latitude, longitude);
                     
-                    if (nearestCity) {
-                        // If within reasonable distance (300km) of an Albanian city
-                        const distance = calculateDistance(
-                            latitude, 
-                            longitude, 
-                            ALBANIAN_CITIES_COORDS[nearestCity].lat,
-                            ALBANIAN_CITIES_COORDS[nearestCity].lon
-                        );
-                        
-                        if (distance <= 300) {
-                            onLocationFound('Albania');
-                            // You could also pass the specific city if you want to show the nearest city
+                    if (nearest.city && nearest.country) {
+                        // If within reasonable distance (300km) of any city
+                        if (nearest.distance <= 300) {
+                            onLocationFound(nearest.country, nearest.city);
                         } else {
-                            setError('You seem to be too far from Albania');
+                            setError(`You are too far from any listed city (${Math.round(nearest.distance)}km from ${nearest.city})`);
                         }
                     } else {
-                        setError('Could not find a nearby Albanian city');
+                        setError('Could not find a nearby city');
                     }
                 } catch (error) {
                     setError('Failed to determine your location');
@@ -134,7 +148,7 @@ const LocationButton = ({ onLocationFound }) => {
                     )}
                 </button>
                 {error && (
-                    <div className="absolute top-full right-0 mt-2 w-48 p-2 bg-red-500/90 backdrop-blur-md text-white text-sm rounded-lg shadow-lg">
+                    <div className="absolute top-full right-0 mt-2 w-64 p-2 bg-red-500/90 backdrop-blur-md text-white text-sm rounded-lg shadow-lg">
                         {error}
                     </div>
                 )}
