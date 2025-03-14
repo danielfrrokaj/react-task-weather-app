@@ -31,6 +31,16 @@
   opacity: 0.5;
 }
 
+.country-name {
+  font-size: var(--font-size-lg);
+  font-weight: 500;
+  color: var(--primary-light);
+  margin: 0 0 var(--space-xs) 0;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  opacity: 0.85;
+}
+
 .city-name {
   font-size: var(--font-size-2xl);
   font-weight: 700;
@@ -135,6 +145,10 @@
     gap: var(--space-lg);
   }
 
+  .country-name {
+    font-size: var(--font-size-md);
+  }
+
   .city-name {
     font-size: var(--font-size-xl);
   }
@@ -156,5 +170,115 @@
 
   .city-info {
     margin-top: var(--space-lg);
+  }
+}
+
+.city-data-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+}
+
+.loading-text, .error-text {
+  color: var(--primary-light);
+  font-size: var(--font-size-lg);
+  margin: 1rem 0;
+}
+
+.error-text {
+  color: var(--accent-1);
+}
+
+.country-name {
+  color: var(--primary-light);
+  font-size: var(--font-size-lg);
+  margin-bottom: 0.5rem;
+  opacity: 0.8;
+}
+
+.city-name {
+  color: var(--primary-light);
+  font-size: var(--font-size-2xl);
+  margin: 0.5rem 0 1.5rem;
+  font-weight: 600;
+}
+
+.temperature-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.temperature-text {
+  color: var(--primary-light);
+  font-size: 3rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.weather-icon {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  margin: 0 0.5rem;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+}
+
+.info-text {
+  color: var(--primary-light);
+  font-size: var(--font-size-lg);
+  margin: 0.5rem 0;
+  opacity: 0.9;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .city-data-container {
+    padding: 1.5rem;
+  }
+
+  .city-name {
+    font-size: var(--font-size-xl);
+  }
+
+  .temperature-text {
+    font-size: 2.5rem;
+  }
+
+  .weather-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .info-text {
+    font-size: var(--font-size-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .city-data-container {
+    padding: 1rem;
+  }
+
+  .city-name {
+    font-size: var(--font-size-lg);
+  }
+
+  .temperature-text {
+    font-size: 2rem;
+  }
+
+  .weather-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .info-text {
+    font-size: var(--font-size-sm);
   }
 } 

@@ -5,13 +5,57 @@ import LocalTime from './components/LocalTime/LocalTime'
 import CityData from './components/CityData'
 import WeatherFeatures from './components/WeatherFeatures'
 import Footer from './components/Footer'
-import backgroundImage from './assets/background.jpg'
+import defaultBackground from './assets/background.jpg'
 import { fetchWeatherData } from './utils/weatherApi'
 import './App.css'
 
 function App() {
   const [selectedCity, setSelectedCity] = useState('Tirana');
   const [weatherData, setWeatherData] = useState(null);
+  const [background, setBackground] = useState(defaultBackground);
+
+  const getWeatherBackground = (condition) => {
+    if (!condition) return defaultBackground;
+    
+    const timeOfDay = condition.is_day ? 'day' : 'night';
+    const text = condition.text.toLowerCase();
+    
+    try {
+      // Map weather conditions to background images
+      if (text.includes('sunny') || text.includes('clear')) {
+        return require(`./assets/background/${timeOfDay}-clear.jpg`);
+      } else if (text.includes('partly cloudy')) {
+        return require(`./assets/background/${timeOfDay}-partly-cloudy.jpg`);
+      } else if (text.includes('cloudy') || text.includes('overcast')) {
+        return require(`./assets/background/${timeOfDay}-cloudy.jpg`);
+      } else if (
+        text.includes('rain') || 
+        text.includes('drizzle') || 
+        text.includes('sleet') ||
+        text.includes('mist')
+      ) {
+        return require(`./assets/background/${timeOfDay}-rain.jpg`);
+      } else if (
+        text.includes('snow') || 
+        text.includes('blizzard') || 
+        text.includes('ice')
+      ) {
+        return require(`./assets/background/${timeOfDay}-snow.jpg`);
+      } else if (
+        text.includes('thunder') || 
+        text.includes('lightning') || 
+        text.includes('storm')
+      ) {
+        return require(`./assets/background/${timeOfDay}-thunder.jpg`);
+      } else if (text.includes('fog') || text.includes('haze')) {
+        return require(`./assets/background/${timeOfDay}-fog.jpg`);
+      }
+      return defaultBackground;
+    } catch (error) {
+      console.warn('Background image not found:', error);
+      return defaultBackground;
+    }
+  };
 
   const handleCitySelect = (city) => {
     setSelectedCity(city);
@@ -22,6 +66,10 @@ function App() {
       try {
         const data = await fetchWeatherData(selectedCity);
         setWeatherData(data);
+        if (data?.current?.condition) {
+          const newBackground = getWeatherBackground(data.current.condition);
+          setBackground(newBackground);
+        }
       } catch (error) {
         console.error('Error fetching weather data:', error);
       }
@@ -31,12 +79,12 @@ function App() {
   }, [selectedCity]);
 
   return (
-    <div className="app-container">
-      {/* Background light orbs */}
-      <div className="light-orb light-orb-1" />
-      <div className="light-orb light-orb-2" />
-      <div className="light-orb light-orb-3" />
-
+    <div className="app-container" style={{ 
+      backgroundImage: `url(${background})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat'
+    }}>
       <Nav onCitySelect={handleCitySelect} />
       <main className="main-content">
         <div className="flex-container">

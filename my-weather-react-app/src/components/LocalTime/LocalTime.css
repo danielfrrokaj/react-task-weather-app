@@ -10,15 +10,15 @@
   font-size: var(--font-size-lg);
   font-weight: 500;
   color: var(--primary-light);
+  padding-left: 20px;
+  padding-right: 20px;
   text-align: center;
   margin: 0;
   position: relative;
   padding: var(--space-md);
   border-radius: var(--radius-md);
-  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(var(--blur-sm));
   border: 1px solid rgba(255, 255, 255, 0.1);
-  transition: all 0.3s ease;
 }
 
 .day-text::before {
@@ -43,9 +43,7 @@
 }
 
 .day-text:hover {
-  transform: translateY(-2px);
   box-shadow: var(--shadow-md);
-  background: rgba(255, 255, 255, 0.15);
 }
 
 /* Responsive adjustments */

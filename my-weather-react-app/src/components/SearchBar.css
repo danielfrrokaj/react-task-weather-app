@@ -3,6 +3,7 @@
   position: relative;
   padding: var(--space-md);
   margin-bottom: 0;
+  z-index: 100002;
 }
 
 .search-title {
@@ -12,12 +13,15 @@
   margin-bottom: var(--space-md);
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   font-family: 'Poppins', sans-serif;
+  position: relative;
+  z-index: 100002;
 }
 
 .search-form {
   display: flex;
   width: 100%;
   position: relative;
+  z-index: 100002;
 }
 
 .search-input {
@@ -71,15 +75,15 @@
   left: 0;
   right: 0;
   margin-top: var(--space-xs);
-  background: var(--gradient-primary);
-  backdrop-filter: blur(var(--blur-md));
+  background: rgba(26, 26, 46, 0.98);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
-  z-index: 10;
+  padding: var(--space-xs);
   max-height: 200px;
   overflow-y: auto;
-  padding: var(--space-xs);
+  z-index: 100003;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
 }
 
 .suggestion-item {

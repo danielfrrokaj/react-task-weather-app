@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import './CityData.css';
-import tempIcon from '../assets/card/temp.png';
 import { fetchWeatherData } from '../utils/weatherApi';
 
 const CityData = ({ cityName = 'Tirana' }) => {
+    const { t } = useTranslation();
     const [weatherData, setWeatherData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -38,20 +39,26 @@ const CityData = ({ cityName = 'Tirana' }) => {
 
     return (
         <div className="city-data-container">
-            <h1 className="city-name">{cityName}</h1>
-            
             {loading && <p className="loading-text">Loading weather data...</p>}
             
             {error && <p className="error-text">{error}</p>}
             
             {!loading && !error && weatherData && (
-                <div className="temperature-container">
-                    <h2 className="temperature-text">
-                        {formatTemperature(weatherData.current.temp_c)}
-                    </h2>
-                    <img src={tempIcon} alt="Temperature" className="temperature-icon" /> 
-                    <p className='info-text'>{weatherData.current.condition.text}</p>
-                </div>
+                <>
+                    <h3 className="country-name">{t(`countries.${weatherData.location.country}`)}</h3>
+                    <h1 className="city-name">{t(`cities.${cityName}`)}</h1>
+                    <div className="temperature-container">
+                        <h2 className="temperature-text">
+                            {formatTemperature(weatherData.current.temp_c)}
+                        </h2>
+                        <img 
+                            src={`https:${weatherData.current.condition.icon}`} 
+                            alt={weatherData.current.condition.text} 
+                            className="weather-icon"
+                        />
+                        <p className='info-text'>{weatherData.current.condition.text}</p>
+                    </div>
+                </>
             )}
         </div>
     );

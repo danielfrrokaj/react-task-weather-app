@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import "./nav.css";
 import rightArrow from "../assets/button_icon/right-arrow.png";
 import rightArrowHover from "../assets/button_icon/right-arrow-hover.png";
@@ -6,6 +7,7 @@ import { EUROPEAN_CAPITALS } from "../utils/weatherApi";
 import LocationWeather from "./LocationWeather";
 
 const Nav = ({ onCitySelect }) => {
+    const { t } = useTranslation();
     // List of European capital cities
     const europeanCapitals = EUROPEAN_CAPITALS;
 
@@ -99,7 +101,7 @@ const Nav = ({ onCitySelect }) => {
                                     className={`carousel-item ${slideDirection} ${city === activeCity ? 'active' : ''}`}
                                     onClick={() => handleCityClick(city)}
                                 >
-                                    {city}
+                                    {t(`cities.${city}`)}
                                 </div>
                             ))}
                         </div>
