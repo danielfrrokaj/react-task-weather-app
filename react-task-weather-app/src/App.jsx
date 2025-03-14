@@ -1,18 +1,24 @@
 import { useState } from 'react'
 import WeatherCard from './components/WeatherCard'
+import Header from './components/Header'
+import LocationButton from './components/LocationButton'
+import { CAPITAL_CITIES } from './services/weatherService'
 
 function App() {
+  const [selectedCountry, setSelectedCountry] = useState('Albania');
+
+  const handleCountryChange = (country) => {
+    setSelectedCountry(country);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-700 to-blue-200 p-4 md:p-8">
-      <header className="max-w-[800px] mx-auto mb-8 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold text-white mb-2 drop-shadow-lg">
-          Weather in Albania
-        </h1>
-        <p className="text-white/80 text-lg font-light">
-          Explore weather conditions across Albanian cities
-        </p>
-      </header>
-      <WeatherCard />
+      <Header 
+        selectedCountry={selectedCountry} 
+        onCountryChange={handleCountryChange}
+      />
+      <LocationButton onLocationFound={handleCountryChange} />
+      <WeatherCard selectedCountry={selectedCountry} />
     </div>
   )
 }

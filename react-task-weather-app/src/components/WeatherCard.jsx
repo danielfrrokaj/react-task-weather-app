@@ -1,36 +1,47 @@
 import { useState, useEffect } from 'react';
-import { ALBANIAN_CITIES, getWeatherForCity } from '../services/weatherService';
+import { CAPITAL_CITIES, getWeatherForCity } from '../services/weatherService';
 import { cityBackgrounds, defaultBackground } from '../config/cityBackgrounds';
 import WeatherDetails from './WeatherDetails';
 
-const WeatherCard = () => {
+const WeatherCard = ({ selectedCountry }) => {
     const [currentCityIndex, setCurrentCityIndex] = useState(0);
     const [weatherData, setWeatherData] = useState(null);
     const [touchStart, setTouchStart] = useState(0);
     const [touchEnd, setTouchEnd] = useState(0);
 
-    const fetchWeatherData = async (city) => {
+    // Filter cities based on selected country
+    const countryCities = CAPITAL_CITIES.filter(city => city.country === selectedCountry);
+
+    const fetchWeatherData = async (cityInfo) => {
         try {
-            const data = await getWeatherForCity(city);
+            const data = await getWeatherForCity(cityInfo);
             setWeatherData(data);
         } catch (error) {
             console.error('Error fetching weather:', error);
         }
     };
 
+    // Reset current city index when country changes
     useEffect(() => {
-        fetchWeatherData(ALBANIAN_CITIES[currentCityIndex]);
-    }, [currentCityIndex]);
+        setCurrentCityIndex(0);
+    }, [selectedCountry]);
+
+    // Fetch weather data when current city changes
+    useEffect(() => {
+        if (countryCities.length > 0) {
+            fetchWeatherData(countryCities[currentCityIndex]);
+        }
+    }, [currentCityIndex, selectedCountry]);
 
     const handleNext = () => {
         setCurrentCityIndex((prev) => 
-            prev === ALBANIAN_CITIES.length - 1 ? 0 : prev + 1
+            prev === countryCities.length - 1 ? 0 : prev + 1
         );
     };
 
     const handlePrev = () => {
         setCurrentCityIndex((prev) => 
-            prev === 0 ? ALBANIAN_CITIES.length - 1 : prev - 1
+            prev === 0 ? countryCities.length - 1 : prev - 1
         );
     };
 
@@ -51,7 +62,7 @@ const WeatherCard = () => {
         }
     };
 
-    if (!weatherData) return null;
+    if (!weatherData || countryCities.length === 0) return null;
 
     const currentCity = weatherData.location.name;
     const backgroundImage = cityBackgrounds[currentCity] || defaultBackground;
@@ -76,28 +87,35 @@ const WeatherCard = () => {
                     </div>
 
                     {/* Navigation Buttons - Hidden on Mobile */}
-                    <button
-                        onClick={handlePrev}
-                        className="hidden md:block absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-2 rounded-full backdrop-blur-sm transition-all"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                        </svg>
-                    </button>
-                    <button
-                        onClick={handleNext}
-                        className="hidden md:block absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-2 rounded-full backdrop-blur-sm transition-all"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                        </svg>
-                    </button>
+                    {countryCities.length > 1 && (
+                        <>
+                            <button
+                                onClick={handlePrev}
+                                className="hidden md:block absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-2 rounded-full backdrop-blur-sm transition-all"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                </svg>
+                            </button>
+                            <button
+                                onClick={handleNext}
+                                className="hidden md:block absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 text-white p-2 rounded-full backdrop-blur-sm transition-all"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                </svg>
+                            </button>
+                        </>
+                    )}
 
                     {/* Weather Information */}
                     <div className="absolute bottom-0 w-full p-6 text-white">
                         <h2 className="text-4xl font-bold mb-2">
                             {weatherData.location.name}
                         </h2>
+                        <p className="text-lg text-white/80 mb-4">
+                            {weatherData.country}
+                        </p>
                         <div className="flex items-center gap-4">
                             <span className="text-5xl font-semibold">
                                 {Math.round(weatherData.current.temp_c)}°C

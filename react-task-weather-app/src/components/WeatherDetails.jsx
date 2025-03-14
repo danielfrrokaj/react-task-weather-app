@@ -3,6 +3,12 @@ const WeatherDetails = ({ weatherData }) => {
 
     const details = [
         {
+            icon: 'fa-location-dot',
+            label: 'Country',
+            value: weatherData.country,
+            color: 'text-emerald-500'
+        },
+        {
             icon: 'fa-temperature-half',
             label: 'Feels Like',
             value: `${Math.round(weatherData.current.feelslike_c)}°C`,
@@ -37,6 +43,12 @@ const WeatherDetails = ({ weatherData }) => {
             label: 'Precipitation',
             value: `${weatherData.current.precip_mm} mm`,
             color: 'text-indigo-500'
+        },
+        {
+            icon: 'fa-sun',
+            label: 'UV Index',
+            value: weatherData.current.uv,
+            color: 'text-yellow-500'
         }
     ];
 
@@ -46,7 +58,7 @@ const WeatherDetails = ({ weatherData }) => {
                 <h3 className="text-2xl font-semibold text-white mb-6">
                     Detailed Weather Information
                 </h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                     {details.map((detail, index) => (
                         <div 
                             key={index}
