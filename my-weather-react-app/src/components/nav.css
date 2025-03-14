@@ -64,12 +64,12 @@ nav a:hover {
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  max-width: 600px;
+  width: 400px;
   padding: 10px 0;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 1; /* Ensure it's below the location icon for mobile */
+  z-index: 1;
 }
   
 .carousel {
@@ -77,7 +77,7 @@ nav a:hover {
   overflow: hidden;
   margin: 0 10px;
   transition: transform 0.3s ease;
-  flex: 1;
+  width: 300px;
   justify-content: center;
   position: relative;
 }
@@ -88,7 +88,8 @@ nav a:hover {
   font-size: 13px;
   white-space: nowrap;
   text-align: center;
-  max-width: 300px;
+  width: 100px;
+  flex-shrink: 0;
 }
   
 /* Animation for items entering from right */
@@ -176,15 +177,19 @@ nav a:hover {
   }
   
   .nav-wrapper {
-    height: 100px; /* Fixed height for mobile to accommodate stacked elements */
+    height: 100px;
   }
   
   .carousel-container {
     position: relative;
     left: auto;
     transform: none;
-    width: 100%;
-    margin-top: 40px; /* Push down to make room for the location icon */
+    width: 300px;
+    margin-top: 40px;
+  }
+  
+  .carousel {
+    width: 220px;
   }
   
   .nav-actions {
@@ -192,13 +197,21 @@ nav a:hover {
     right: 15px;
     top: 15px;
     transform: none;
-    z-index: 2; /* Ensure it's above the carousel on mobile */
+    z-index: 2;
   }
 }
   
 @media (max-width: 480px) {
+  .carousel-container {
+    width: 260px;
+  }
+  
+  .carousel {
+    width: 180px;
+  }
+  
   .carousel-item {
-    min-width: 80px;
+    width: 90px;
     padding: 8px 12px;
   }
   
