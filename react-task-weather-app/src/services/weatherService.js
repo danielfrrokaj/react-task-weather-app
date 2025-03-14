@@ -1,5 +1,5 @@
 const API_KEY = '252c1b0fcaee45c88bc212917251003';
-const BASE_URL = 'http://api.weatherapi.com/v1';
+const BASE_URL = 'https://api.weatherapi.com/v1';
 
 // List of major Albanian cities
 export const ALBANIAN_CITIES = [
