@@ -1,7 +1,7 @@
 export default {
     header: {
-        title: 'Weather App',
-        selectCountry: 'Select Country'
+        title: 'Weather in',
+        selectCountry: 'How does the weather look today?'
     },
     weather: {
         humidity: 'Humidity',

@@ -1,6 +1,6 @@
 export default {
     header: {
-        title: 'Aplikacioni i Motit',
+        title: 'Moti në',
         selectCountry: 'Zgjidh Shtetin'
     },
     weather: {
@@ -25,20 +25,20 @@ export default {
         developedBy: 'Zhvilluar Nga'
     },
     countries: {
-        'Albania': 'Shqipëria',
-        'Austria': 'Austria',
-        'Belgium': 'Belgjika',
-        'Denmark': 'Danimarka',
-        'Finland': 'Finlanda',
-        'France': 'Franca',
-        'Germany': 'Gjermania',
-        'Ireland': 'Irlanda',
-        'Italy': 'Italia',
-        'Netherlands': 'Holanda',
-        'Norway': 'Norvegjia',
-        'Portugal': 'Portugalia',
-        'Spain': 'Spanja',
-        'Sweden': 'Suedia',
-        'United Kingdom': 'Mbretëria e Bashkuar'
+        'Albania': 'Shqipëri',
+        'Austria': 'Austri',
+        'Belgium': 'Belgjikë',
+        'Denmark': 'Danimarkë',
+        'Finland': 'Finlandë',
+        'France': 'Francë',
+        'Germany': 'Gjermani',
+        'Ireland': 'Irlandë',
+        'Italy': 'Itali',
+        'Netherlands': 'Holandë',
+        'Norway': 'Norvegji',
+        'Portugal': 'Portugali',
+        'Spain': 'Spanjë',
+        'Sweden': 'Suedi',
+        'United Kingdom': 'Angli'
     }
 }; 
