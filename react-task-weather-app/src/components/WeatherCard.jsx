@@ -4,6 +4,7 @@ import { cityBackgrounds, defaultBackground } from '../config/cityBackgrounds';
 import WeatherDetails from './WeatherDetails';
 import AIRecommendButton from './AIRecommendButton';
 import AIRecommendations from './AIRecommendations';
+import { useTranslation } from '../context/TranslationContext';
 
 const WeatherCard = ({ selectedCountry, initialCity }) => {
     const [currentCityIndex, setCurrentCityIndex] = useState(0);
@@ -11,6 +12,7 @@ const WeatherCard = ({ selectedCountry, initialCity }) => {
     const [touchStart, setTouchStart] = useState(0);
     const [touchEnd, setTouchEnd] = useState(0);
     const [showRecommendations, setShowRecommendations] = useState(false);
+    const { t } = useTranslation();
 
     // Filter cities based on selected country
     const countryCities = CAPITAL_CITIES.filter(city => city.country === selectedCountry);
@@ -137,7 +139,7 @@ const WeatherCard = ({ selectedCountry, initialCity }) => {
                             {weatherData.location.name}
                         </h2>
                         <p className="text-lg text-white/80 mb-4">
-                            {weatherData.country}
+                            {t(`countries.${weatherData.country}`)}
                         </p>
                         <div className="flex items-center gap-4">
                             <span className="text-5xl font-semibold">

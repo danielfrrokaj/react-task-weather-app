@@ -1,4 +1,8 @@
+import { useTranslation } from '../context/TranslationContext';
+
 const AIRecommendButton = ({ onClick }) => {
+    const { t } = useTranslation();
+    
     return (
         <button
             onClick={onClick}
@@ -17,7 +21,7 @@ const AIRecommendButton = ({ onClick }) => {
                     d="M13 10V3L4 14h7v7l9-11h-7z"
                 />
             </svg>
-            AI Recommendations for Today
+            {t('ai.title')}
         </button>
     );
 };

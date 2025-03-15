@@ -1,4 +1,8 @@
+import { useTranslation } from '../context/TranslationContext';
+
 const WeatherDetails = ({ weatherData }) => {
+    const { t } = useTranslation();
+    
     if (!weatherData) return null;
 
     const details = [
@@ -10,19 +14,19 @@ const WeatherDetails = ({ weatherData }) => {
         },
         {
             icon: 'fa-temperature-half',
-            label: 'Feels Like',
+            label: t('weather.feelsLike'),
             value: `${Math.round(weatherData.current.feelslike_c)}°C`,
             color: 'text-red-500'
         },
         {
             icon: 'fa-droplet',
-            label: 'Humidity',
+            label: t('weather.humidity'),
             value: `${weatherData.current.humidity}%`,
             color: 'text-blue-500'
         },
         {
             icon: 'fa-wind',
-            label: 'Wind Speed',
+            label: t('weather.wind'),
             value: `${weatherData.current.wind_kph} km/h`,
             color: 'text-teal-500'
         },
@@ -46,7 +50,7 @@ const WeatherDetails = ({ weatherData }) => {
         },
         {
             icon: 'fa-sun',
-            label: 'UV Index',
+            label: t('weather.condition'),
             value: weatherData.current.uv,
             color: 'text-yellow-500'
         }

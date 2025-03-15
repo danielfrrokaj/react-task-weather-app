@@ -1,29 +1,41 @@
-const Footer = ({ language, onLanguageChange }) => {
+import { useTranslation } from '../context/TranslationContext';
+
+const Footer = () => {
+    const { language, setLanguage, t } = useTranslation();
+
     return (
-        <footer className="fixed bottom-0 left-0 right-0 bg-white/5 backdrop-blur-sm py-3 px-4">
+        <footer className="w-full bg-white/5 backdrop-blur-sm py-3 px-4 mt-auto">
             <div className="max-w-[800px] mx-auto flex items-center justify-between">
                 <div className="flex items-center gap-3">
                     <div className="flex items-center bg-white/10 rounded-lg overflow-hidden">
                         <button
-                            onClick={() => onLanguageChange('AL')}
+                            onClick={() => setLanguage('al')}
                             className={`px-3 py-1 text-sm transition-colors duration-200 ${
-                                language === 'AL' ? 'bg-blue-500 text-white' : 'text-white/80 hover:text-white'
+                                language === 'al' ? 'bg-blue-500 text-white' : 'text-white/80 hover:text-white'
                             }`}
                         >
                             AL
                         </button>
                         <button
-                            onClick={() => onLanguageChange('EN')}
+                            onClick={() => setLanguage('en')}
                             className={`px-3 py-1 text-sm transition-colors duration-200 ${
-                                language === 'EN' ? 'bg-blue-500 text-white' : 'text-white/80 hover:text-white'
+                                language === 'en' ? 'bg-blue-500 text-white' : 'text-white/80 hover:text-white'
                             }`}
                         >
                             EN
                         </button>
+                        <button
+                            onClick={() => setLanguage('it')}
+                            className={`px-3 py-1 text-sm transition-colors duration-200 ${
+                                language === 'it' ? 'bg-blue-500 text-white' : 'text-white/80 hover:text-white'
+                            }`}
+                        >
+                            IT
+                        </button>
                     </div>
                 </div>
                 <div className="flex items-center gap-2 text-white/80">
-                    <span className="text-sm">Developed By Danjel Frrokaj</span>
+                    <span className="text-sm">{t('footer.developedBy')} Danjel Frrokaj</span>
                     <a
                         href="https://github.com/frrokaj"
                         target="_blank"

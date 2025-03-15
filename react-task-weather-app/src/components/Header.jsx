@@ -1,21 +1,28 @@
 import { useState } from 'react';
 import { CAPITAL_CITIES } from '../services/weatherService';
+import { useTranslation } from '../context/TranslationContext';
 
 // Get unique countries from CAPITAL_CITIES
 const uniqueCountries = [...new Set(CAPITAL_CITIES.map(city => city.country))].sort();
 
 const Header = ({ selectedCountry, onCountryChange }) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const { t } = useTranslation();
+
+    // Get translated country name
+    const getTranslatedCountry = (country) => {
+        return t(`countries.${country}`);
+    };
 
     return (
         <header className="max-w-[800px] mx-auto mb-8 text-center relative pt-[60px] md:pt-0">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-2 drop-shadow-lg ">
-                Weather in{' '}
+                {t('header.title')}{' '}
                 <button
                     onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                     className="inline-flex items-center hover:text-blue-300 transition-colors"
                 >
-                    {selectedCountry}
+                    {getTranslatedCountry(selectedCountry)}
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className={`h-8 w-8 ml-2 transition-transform ${isDropdownOpen ? 'rotate-180' : ''}`}
@@ -28,7 +35,7 @@ const Header = ({ selectedCountry, onCountryChange }) => {
                 </button>
             </h1>
             <p className="text-white/80 text-lg font-light">
-                Explore weather conditions in {selectedCountry}
+                {t('header.selectCountry')}
             </p>
 
             {/* Country Dropdown */}
@@ -46,7 +53,7 @@ const Header = ({ selectedCountry, onCountryChange }) => {
                                     country === selectedCountry ? 'text-blue-300' : 'text-white'
                                 }`}
                             >
-                                {country}
+                                {getTranslatedCountry(country)}
                             </button>
                         ))}
                     </div>

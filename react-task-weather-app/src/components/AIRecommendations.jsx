@@ -1,10 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
+import { useTranslation } from '../context/TranslationContext';
 
 const AIRecommendations = ({ weatherData, isVisible }) => {
     const [recommendation, setRecommendation] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const lastWeatherState = useRef(null);
     const hasGeneratedRef = useRef(false);
+    const { t } = useTranslation();
 
     const formatResponse = (text) => {
         // Split into lines and process each line
@@ -44,8 +46,8 @@ const AIRecommendations = ({ weatherData, isVisible }) => {
                 - Location: ${weatherInfo.location.name}, ${weatherInfo.location.country}
                 
                 Provide two specific recommendations: (keep it as short and concise)
-                1. CLOTHING: List essential clothing items and accessories suitable for these conditions.
-                2. ACTIVITIES: Suggest 2-3 weather-appropriate outdoor activities.`;
+                1. ${t('ai.clothing')}: List essential clothing items and accessories suitable for these conditions.
+                2. ${t('ai.activities')}: Suggest 2-3 weather-appropriate outdoor activities.`;
 
             const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
                 method: 'POST',
@@ -79,7 +81,7 @@ const AIRecommendations = ({ weatherData, isVisible }) => {
             lastWeatherState.current = weatherInfo;
         } catch (error) {
             console.error('Error generating recommendation:', error);
-            setRecommendation('Sorry, I could not generate a recommendation at this time.');
+            setRecommendation(t('ai.error'));
         } finally {
             setIsLoading(false);
         }
@@ -122,7 +124,7 @@ const AIRecommendations = ({ weatherData, isVisible }) => {
                                 d="M13 10V3L4 14h7v7l9-11h-7z"
                             />
                         </svg>
-                        <h3 className="text-xl font-semibold text-white">AI Weather Recommendation</h3>
+                        <h3 className="text-xl font-semibold text-white">{t('ai.title')}</h3>
                     </div>
                     {recommendation && !isLoading && (
                         <button
@@ -142,7 +144,7 @@ const AIRecommendations = ({ weatherData, isVisible }) => {
                                     d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" 
                                 />
                             </svg>
-                            Reset
+                            {t('ai.reset')}
                         </button>
                     )}
                 </div>

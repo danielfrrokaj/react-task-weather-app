@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { CAPITAL_CITIES } from '../services/weatherService';
+import { useTranslation } from '../context/TranslationContext';
 
 // Haversine formula to calculate distance between two points on Earth
 const calculateDistance = (lat1, lon1, lat2, lon2) => {
@@ -50,6 +51,7 @@ const CITIES_COORDS = {
 const LocationButton = ({ onLocationFound }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
+    const { t } = useTranslation();
 
     const findNearestCity = (userLat, userLon) => {
         let nearestCity = null;
@@ -96,16 +98,16 @@ const LocationButton = ({ onLocationFound }) => {
                             setError(`You are too far from any listed city (${Math.round(nearest.distance)}km from ${nearest.city})`);
                         }
                     } else {
-                        setError('Could not find a nearby city');
+                        setError(t('location.error'));
                     }
                 } catch (error) {
-                    setError('Failed to determine your location');
+                    setError(t('location.error'));
                 } finally {
                     setIsLoading(false);
                 }
             },
             (error) => {
-                setError('Failed to get your location. Please allow location access.');
+                setError(t('location.error'));
                 setIsLoading(false);
             }
         );
@@ -118,7 +120,7 @@ const LocationButton = ({ onLocationFound }) => {
                     onClick={handleLocationClick}
                     disabled={isLoading}
                     className="group flex items-center justify-center w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-md shadow-lg transition-all duration-300 hover:scale-110 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
-                    title="Use my location"
+                    title={t('location.useMyLocation')}
                 >
                     {isLoading ? (
                         <svg className="animate-spin h-6 w-6 text-blue-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
