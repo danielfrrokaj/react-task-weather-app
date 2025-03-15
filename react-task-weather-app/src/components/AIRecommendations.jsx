@@ -45,9 +45,9 @@ const AIRecommendations = ({ weatherData, isVisible }) => {
                 - Humidity: ${weatherInfo.current.humidity}%
                 - Location: ${weatherInfo.location.name}, ${weatherInfo.location.country}
                 
-                Provide two specific recommendations: (keep it as short and concise)
-                1. ${t('ai.clothing')}: List essential clothing items and accessories suitable for these conditions.
-                2. ${t('ai.activities')}: Suggest 2-3 weather-appropriate outdoor activities.`;
+                Provide two specific recommendations: (keep it as short and concise), (if location is in Albania, answer in albanian)
+                1. Clothing: List essential clothing items and accessories suitable for these conditions.
+                2. Activities: Suggest 2-3 weather-appropriate outdoor activities.`;
 
             const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
                 method: 'POST',
@@ -56,7 +56,7 @@ const AIRecommendations = ({ weatherData, isVisible }) => {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    model: "mixtral-8x7b-32768",
+                    model: "llama-3.3-70b-versatile",
                     messages: [
                         {
                             role: "user",
@@ -64,7 +64,7 @@ const AIRecommendations = ({ weatherData, isVisible }) => {
                         }
                     ],
                     temperature: 0.7,
-                    max_tokens: 150,
+                    max_tokens: 200,
                     top_p: 1,
                     stream: false,
                     n: 1

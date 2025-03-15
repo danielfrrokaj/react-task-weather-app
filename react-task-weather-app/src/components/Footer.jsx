@@ -1,46 +1,11 @@
 import { useTranslation } from '../context/TranslationContext';
 
 const Footer = () => {
-    const { language, setLanguage, t } = useTranslation();
-    
-    console.log('Footer rendering with language:', language);
-
-    const handleLanguageChange = (lang) => {
-        console.log('Language button clicked:', lang);
-        setLanguage(lang);
-    };
+    const { t } = useTranslation();
 
     return (
         <footer className="w-full bg-white/5 backdrop-blur-sm py-3 px-4 mt-auto">
-            <div className="max-w-[800px] mx-auto flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                    <div className="flex items-center bg-white/10 rounded-lg overflow-hidden">
-                        <button
-                            onClick={() => handleLanguageChange('al')}
-                            className={`px-3 py-1 text-sm transition-colors duration-200 ${
-                                language === 'al' ? 'bg-blue-500 text-white' : 'text-white/80 hover:text-white'
-                            }`}
-                        >
-                            AL
-                        </button>
-                        <button
-                            onClick={() => handleLanguageChange('en')}
-                            className={`px-3 py-1 text-sm transition-colors duration-200 ${
-                                language === 'en' ? 'bg-blue-500 text-white' : 'text-white/80 hover:text-white'
-                            }`}
-                        >
-                            EN
-                        </button>
-                        <button
-                            onClick={() => handleLanguageChange('it')}
-                            className={`px-3 py-1 text-sm transition-colors duration-200 ${
-                                language === 'it' ? 'bg-blue-500 text-white' : 'text-white/80 hover:text-white'
-                            }`}
-                        >
-                            IT
-                        </button>
-                    </div>
-                </div>
+            <div className="max-w-[800px] mx-auto flex items-center justify-center">
                 <div className="flex items-center gap-2 text-white/80">
                     <span className="text-sm">{t('footer.developedBy')} Danjel Frrokaj</span>
                     <a
