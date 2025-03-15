@@ -2,11 +2,13 @@ import { useState } from 'react'
 import WeatherCard from './components/WeatherCard'
 import Header from './components/Header'
 import LocationButton from './components/LocationButton'
+import Footer from './components/Footer'
 import { CAPITAL_CITIES } from './services/weatherService'
 
 function App() {
   const [selectedCountry, setSelectedCountry] = useState('Albania');
   const [selectedCity, setSelectedCity] = useState(null);
+  const [language, setLanguage] = useState('EN');
 
   const handleCountryChange = (country) => {
     setSelectedCountry(country);
@@ -18,8 +20,13 @@ function App() {
     setSelectedCity(city);
   };
 
+  const handleLanguageChange = (newLang) => {
+    setLanguage(newLang);
+    // You can add language-specific logic here
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-700 to-blue-200 p-4 md:p-8">
+    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-slate-900 to-black relative pb-16">
       <LocationButton onLocationFound={handleLocationFound} />
       <Header 
         selectedCountry={selectedCountry} 
@@ -29,6 +36,7 @@ function App() {
         selectedCountry={selectedCountry} 
         initialCity={selectedCity}
       />
+      <Footer language={language} onLanguageChange={handleLanguageChange} />
     </div>
   )
 }

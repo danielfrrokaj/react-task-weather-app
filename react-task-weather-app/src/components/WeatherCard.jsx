@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { CAPITAL_CITIES, getWeatherForCity } from '../services/weatherService';
 import { cityBackgrounds, defaultBackground } from '../config/cityBackgrounds';
 import WeatherDetails from './WeatherDetails';
@@ -11,7 +11,6 @@ const WeatherCard = ({ selectedCountry, initialCity }) => {
     const [touchStart, setTouchStart] = useState(0);
     const [touchEnd, setTouchEnd] = useState(0);
     const [showRecommendations, setShowRecommendations] = useState(false);
-    const [showSwipeHint, setShowSwipeHint] = useState(false);
 
     // Filter cities based on selected country
     const countryCities = CAPITAL_CITIES.filter(city => city.country === selectedCountry);
@@ -46,20 +45,6 @@ const WeatherCard = ({ selectedCountry, initialCity }) => {
 
         fetchWeatherData();
     }, [currentCityIndex, selectedCountry, countryCities]);
-
-    useEffect(() => {
-        // Check if user has seen the hint before
-        const hasSeenHint = localStorage.getItem('hasSeenSwipeHint');
-        if (!hasSeenHint) {
-            setShowSwipeHint(true);
-            // Set timeout to auto-hide hint after 3 seconds
-            const timer = setTimeout(() => {
-                setShowSwipeHint(false);
-                localStorage.setItem('hasSeenSwipeHint', 'true');
-            }, 3000);
-            return () => clearTimeout(timer);
-        }
-    }, []);
 
     const handleNext = () => {
         setCurrentCityIndex(prevIndex => 
@@ -176,47 +161,6 @@ const WeatherCard = ({ selectedCountry, initialCity }) => {
             </div>
             <AIRecommendations weatherData={weatherData} isVisible={showRecommendations} />
             <WeatherDetails weatherData={weatherData} />
-            
-            {/* Swipe Hint Overlay */}
-            {showSwipeHint && (
-                <div className="absolute inset-0 pointer-events-none">
-                    <div className="absolute inset-0 bg-black/40 backdrop-blur-sm rounded-xl" />
-                    <div className="absolute inset-0 flex items-center justify-between px-8">
-                        <div className="flex items-center gap-2 text-white/90 animate-pulse">
-                            <svg 
-                                className="w-6 h-6" 
-                                fill="none" 
-                                stroke="currentColor" 
-                                viewBox="0 0 24 24"
-                            >
-                                <path 
-                                    strokeLinecap="round" 
-                                    strokeLinejoin="round" 
-                                    strokeWidth={2} 
-                                    d="M15 19l-7-7 7-7" 
-                                />
-                            </svg>
-                            <span className="text-sm font-medium">Swipe Left</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-white/90 animate-pulse">
-                            <span className="text-sm font-medium">Swipe Right</span>
-                            <svg 
-                                className="w-6 h-6" 
-                                fill="none" 
-                                stroke="currentColor" 
-                                viewBox="0 0 24 24"
-                            >
-                                <path 
-                                    strokeLinecap="round" 
-                                    strokeLinejoin="round" 
-                                    strokeWidth={2} 
-                                    d="M9 5l7 7-7 7" 
-                                />
-                            </svg>
-                        </div>
-                    </div>
-                </div>
-            )}
         </div>
     );
 };
