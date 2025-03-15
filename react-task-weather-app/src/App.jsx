@@ -4,13 +4,21 @@ import Header from './components/Header'
 import LocationButton from './components/LocationButton'
 import Footer from './components/Footer'
 import { CAPITAL_CITIES } from './services/weatherService'
-import { TranslationProvider } from './context/TranslationContext'
+import { TranslationProvider, useTranslation } from './context/TranslationContext'
 import { detectUserCountry } from './services/ipLocationService'
 
-function App() {
+// Country to language mapping
+const COUNTRY_LANGUAGE_MAP = {
+  'Albania': 'al',
+  'Italy': 'it',
+  // Default to English for other countries
+};
+
+function AppContent() {
   const [selectedCountry, setSelectedCountry] = useState('Albania');
   const [selectedCity, setSelectedCity] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const { setLanguage } = useTranslation();
 
   // Detect user's country on initial load
   useEffect(() => {
@@ -20,6 +28,11 @@ function App() {
         const { country, city } = await detectUserCountry();
         setSelectedCountry(country);
         setSelectedCity(city);
+        
+        // Set language based on detected country
+        const detectedLanguage = COUNTRY_LANGUAGE_MAP[country] || 'en';
+        console.log('Setting language based on country:', country, 'Language:', detectedLanguage);
+        setLanguage(detectedLanguage);
       } catch (error) {
         console.error('Error detecting location:', error);
       } finally {
@@ -28,7 +41,7 @@ function App() {
     };
 
     detectLocation();
-  }, []);
+  }, [setLanguage]);
 
   const handleCountryChange = (country) => {
     setSelectedCountry(country);
@@ -38,26 +51,36 @@ function App() {
   const handleLocationFound = (country, city) => {
     setSelectedCountry(country);
     setSelectedCity(city);
+    
+    // Update language when location changes
+    const newLanguage = COUNTRY_LANGUAGE_MAP[country] || 'en';
+    setLanguage(newLanguage);
   };
 
   return (
-    <TranslationProvider>
-      <div className="min-h-screen bg-gradient-to-br from-blue-900 via-slate-900 to-black flex flex-col pt-4 md:pt-8">
-        <LocationButton onLocationFound={handleLocationFound} />
-        <Header 
+    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-slate-900 to-black flex flex-col pt-4 md:pt-8">
+      <LocationButton onLocationFound={handleLocationFound} />
+      <Header 
+        selectedCountry={selectedCountry} 
+        onCountryChange={handleCountryChange}
+      />
+      {!isLoading && (
+        <WeatherCard 
           selectedCountry={selectedCountry} 
-          onCountryChange={handleCountryChange}
+          initialCity={selectedCity}
         />
-        {!isLoading && (
-          <WeatherCard 
-            selectedCountry={selectedCountry} 
-            initialCity={selectedCity}
-          />
-        )}
-        <Footer />
-      </div>
+      )}
+      <Footer />
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <TranslationProvider>
+      <AppContent />
     </TranslationProvider>
-  )
+  );
 }
 
 export default App

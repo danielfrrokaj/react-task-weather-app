@@ -2,6 +2,13 @@ import { useTranslation } from '../context/TranslationContext';
 
 const Footer = () => {
     const { language, setLanguage, t } = useTranslation();
+    
+    console.log('Footer rendering with language:', language);
+
+    const handleLanguageChange = (lang) => {
+        console.log('Language button clicked:', lang);
+        setLanguage(lang);
+    };
 
     return (
         <footer className="w-full bg-white/5 backdrop-blur-sm py-3 px-4 mt-auto">
@@ -9,7 +16,7 @@ const Footer = () => {
                 <div className="flex items-center gap-3">
                     <div className="flex items-center bg-white/10 rounded-lg overflow-hidden">
                         <button
-                            onClick={() => setLanguage('al')}
+                            onClick={() => handleLanguageChange('al')}
                             className={`px-3 py-1 text-sm transition-colors duration-200 ${
                                 language === 'al' ? 'bg-blue-500 text-white' : 'text-white/80 hover:text-white'
                             }`}
@@ -17,7 +24,7 @@ const Footer = () => {
                             AL
                         </button>
                         <button
-                            onClick={() => setLanguage('en')}
+                            onClick={() => handleLanguageChange('en')}
                             className={`px-3 py-1 text-sm transition-colors duration-200 ${
                                 language === 'en' ? 'bg-blue-500 text-white' : 'text-white/80 hover:text-white'
                             }`}
@@ -25,7 +32,7 @@ const Footer = () => {
                             EN
                         </button>
                         <button
-                            onClick={() => setLanguage('it')}
+                            onClick={() => handleLanguageChange('it')}
                             className={`px-3 py-1 text-sm transition-colors duration-200 ${
                                 language === 'it' ? 'bg-blue-500 text-white' : 'text-white/80 hover:text-white'
                             }`}
