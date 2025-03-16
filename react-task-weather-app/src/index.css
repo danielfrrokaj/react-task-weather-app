@@ -136,5 +136,58 @@ html, body {
   animation-delay: 1000ms;
 }
 
+/* Typing animation for AI recommendations */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: rgba(255, 255, 255, 0.7); }
+}
+
+.typing-effect {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: 
+    typing 3.5s steps(40, end),
+    blink-caret 0.75s step-end infinite;
+  border-right: 2px solid rgba(255, 255, 255, 0.7);
+}
+
+.typing-cursor::after {
+  content: '|';
+  display: inline-block;
+  color: rgba(255, 255, 255, 0.7);
+  animation: blink-caret 0.75s step-end infinite;
+  margin-left: 2px;
+  font-weight: normal;
+}
+
+.typing-container p {
+  margin: 0;
+  padding: 0;
+}
+
+.typing-line {
+  overflow: hidden;
+  white-space: nowrap;
+  animation: typing 2s steps(40, end);
+  margin-bottom: 0.5rem;
+}
+
+.typing-line:last-child {
+  border-right: 2px solid rgba(255, 255, 255, 0.7);
+  animation: 
+    typing 2s steps(40, end),
+    blink-caret 0.75s step-end infinite;
+}
+
 
 

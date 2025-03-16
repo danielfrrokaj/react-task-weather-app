@@ -3,8 +3,10 @@ import { useTranslation } from '../context/TranslationContext';
 
 const AIRecommendations = ({ weatherData, isVisible }) => {
     const [recommendation, setRecommendation] = useState('');
+    const [displayedText, setDisplayedText] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [isRefreshing, setIsRefreshing] = useState(false);
+    const [isTyping, setIsTyping] = useState(false);
     const lastWeatherState = useRef(null);
     const hasGeneratedRef = useRef(false);
     const recommendationsCache = useRef({});
@@ -83,6 +85,8 @@ const AIRecommendations = ({ weatherData, isVisible }) => {
         if (!forceRefresh && recommendationsCache.current[cacheKey]) {
             console.log('Using cached AI recommendation');
             setRecommendation(recommendationsCache.current[cacheKey]);
+            setDisplayedText('');
+            setIsTyping(true);
             lastWeatherState.current = weatherInfo;
             return;
         }
@@ -159,10 +163,13 @@ const AIRecommendations = ({ weatherData, isVisible }) => {
             recommendationsCache.current[cacheKey] = formattedResponse;
             
             setRecommendation(formattedResponse);
+            setDisplayedText('');
+            setIsTyping(true);
             lastWeatherState.current = weatherInfo;
         } catch (error) {
             console.error('Error generating recommendation:', error);
             setRecommendation(t('ai.error'));
+            setDisplayedText(t('ai.error'));
         } finally {
             setIsLoading(false);
             setIsRefreshing(false);
@@ -171,6 +178,8 @@ const AIRecommendations = ({ weatherData, isVisible }) => {
 
     const handleReset = () => {
         setRecommendation('');
+        setDisplayedText('');
+        setIsTyping(false);
         lastWeatherState.current = null;
         hasGeneratedRef.current = false;
         
@@ -181,6 +190,103 @@ const AIRecommendations = ({ weatherData, isVisible }) => {
             }, 100); // Small delay to ensure state is updated
         }
     };
+
+    // Typing animation effect
+    useEffect(() => {
+        if (!recommendation || !isTyping) return;
+        
+        // Remove HTML tags for typing animation
+        const plainText = recommendation.replace(/<[^>]*>/g, '');
+        
+        // Split the text into lines for line-by-line typing
+        const lines = plainText.split('\n').filter(line => line.trim() !== '');
+        let currentLineIndex = 0;
+        let currentCharIndex = 0;
+        
+        const typingInterval = setInterval(() => {
+            if (currentLineIndex < lines.length) {
+                const currentLine = lines[currentLineIndex];
+                
+                if (currentCharIndex <= currentLine.length) {
+                    // Get all completed lines
+                    const completedLines = lines.slice(0, currentLineIndex);
+                    
+                    // Get the current line being typed
+                    const typingLine = currentLine.substring(0, currentCharIndex);
+                    
+                    // Combine completed lines with the current typing line
+                    let formattedText = [...completedLines, typingLine].join('\n');
+                    
+                    // Apply formatting
+                    formattedText = formattedText.replace(/\b[A-Z]{2,}\b/g, match => `<strong>${match}</strong>`);
+                    
+                    // Add line breaks for lines starting with dash
+                    formattedText = formattedText.split('\n').map(line => {
+                        if (line.trim().startsWith('-')) {
+                            return `<br/>${line}`;
+                        }
+                        return line;
+                    }).join('\n');
+                    
+                    setDisplayedText(formattedText);
+                    currentCharIndex++;
+                } else {
+                    // Move to the next line
+                    currentLineIndex++;
+                    currentCharIndex = 0;
+                    
+                    // Add a slight pause between lines
+                    clearInterval(typingInterval);
+                    setTimeout(() => {
+                        const newTypingInterval = setInterval(() => {
+                            if (currentLineIndex < lines.length) {
+                                const currentLine = lines[currentLineIndex];
+                                
+                                if (currentCharIndex <= currentLine.length) {
+                                    // Get all completed lines
+                                    const completedLines = lines.slice(0, currentLineIndex);
+                                    
+                                    // Get the current line being typed
+                                    const typingLine = currentLine.substring(0, currentCharIndex);
+                                    
+                                    // Combine completed lines with the current typing line
+                                    let formattedText = [...completedLines, typingLine].join('\n');
+                                    
+                                    // Apply formatting
+                                    formattedText = formattedText.replace(/\b[A-Z]{2,}\b/g, match => `<strong>${match}</strong>`);
+                                    
+                                    // Add line breaks for lines starting with dash
+                                    formattedText = formattedText.split('\n').map(line => {
+                                        if (line.trim().startsWith('-')) {
+                                            return `<br/>${line}`;
+                                        }
+                                        return line;
+                                    }).join('\n');
+                                    
+                                    setDisplayedText(formattedText);
+                                    currentCharIndex++;
+                                } else {
+                                    // Move to the next line
+                                    currentLineIndex++;
+                                    currentCharIndex = 0;
+                                }
+                            } else {
+                                clearInterval(newTypingInterval);
+                                setDisplayedText(recommendation);
+                                setIsTyping(false);
+                            }
+                        }, 20); // Adjust typing speed here
+                    }, 200); // Pause between lines
+                }
+            } else {
+                clearInterval(typingInterval);
+                setDisplayedText(recommendation);
+                setIsTyping(false);
+            }
+        }, 20); // Adjust typing speed here
+        
+        return () => clearInterval(typingInterval);
+    }, [recommendation, isTyping]);
 
     useEffect(() => {
         if (!isVisible) {
@@ -252,7 +358,12 @@ const AIRecommendations = ({ weatherData, isVisible }) => {
                         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-400"></div>
                     </div>
                 ) : (
-                    <p className="leading-relaxed whitespace-pre-line" dangerouslySetInnerHTML={{ __html: recommendation }}></p>
+                    <div className="typing-container">
+                        <p 
+                            className={`leading-relaxed whitespace-pre-line ${isTyping ? 'typing-cursor' : ''}`} 
+                            dangerouslySetInnerHTML={{ __html: displayedText || recommendation }}
+                        ></p>
+                    </div>
                 )}
             </div>
         </div>

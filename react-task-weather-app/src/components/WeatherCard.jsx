@@ -13,6 +13,7 @@ const WeatherCard = ({ selectedCountry, initialCity, searchResults }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [isAnimating, setIsAnimating] = useState(true);
     const weatherCache = useRef({});
+    const [currentCityInfo, setCurrentCityInfo] = useState(null);
     const { t } = useTranslation();
 
     // Filter cities based on selected country
@@ -22,56 +23,47 @@ const WeatherCard = ({ selectedCountry, initialCity, searchResults }) => {
     useEffect(() => {
         if (searchResults) {
             setWeatherData(searchResults);
-            // Trigger animations when new search results are loaded
             setIsAnimating(true);
-            setTimeout(() => setIsAnimating(false), 2000); // Reset after animations complete
+            setTimeout(() => setIsAnimating(false), 2000);
         }
     }, [searchResults]);
 
-    // Fetch weather data for the initial city or first city in the country
+    // Set current city info
     useEffect(() => {
-        // Skip fetching if we already have search results
-        if (searchResults) return;
-        
+        if (countryCities.length === 0 || searchResults) return;
+
+        let cityInfo;
+        if (initialCity) {
+            const foundCity = countryCities.find(city => city.city === initialCity);
+            cityInfo = foundCity || countryCities[0];
+        } else {
+            cityInfo = countryCities[0];
+        }
+
+        setCurrentCityInfo(cityInfo);
+    }, [selectedCountry, initialCity, countryCities, searchResults]);
+
+    // Fetch weather data for the current city
+    useEffect(() => {
+        if (!currentCityInfo || searchResults) return;
+
         const fetchWeatherData = async () => {
-            if (countryCities.length === 0) return;
-            
-            // Find the city to display (either initialCity or first city in the list)
-            let cityInfo;
-            if (initialCity) {
-                const foundCity = countryCities.find(city => city.city === initialCity);
-                cityInfo = foundCity || countryCities[0];
-            } else {
-                cityInfo = countryCities[0];
-            }
-            
-            console.log('Fetching data for city:', cityInfo.city);
-            
-            const cacheKey = `${cityInfo.country}-${cityInfo.city}`;
-            
-            // Check if we've already fetched this city's data
+            const cacheKey = `${currentCityInfo.country}-${currentCityInfo.city}`;
+
             if (weatherCache.current[cacheKey]) {
-                console.log('Using cached data for:', cityInfo.city);
                 setWeatherData(weatherCache.current[cacheKey]);
-                // Trigger animations when new data is loaded from cache
                 setIsAnimating(true);
-                setTimeout(() => setIsAnimating(false), 2000); // Reset after animations complete
+                setTimeout(() => setIsAnimating(false), 2000);
                 return;
             }
-            
+
             try {
                 setIsLoading(true);
-                console.log('Fetching weather for:', cityInfo.city);
-                const data = await getWeatherForCity(cityInfo);
-                console.log('Weather data received:', data);
-                
-                // Store in cache
+                const data = await getWeatherForCity(currentCityInfo);
                 weatherCache.current[cacheKey] = data;
-                
                 setWeatherData(data);
-                // Trigger animations when new data is loaded
                 setIsAnimating(true);
-                setTimeout(() => setIsAnimating(false), 2000); // Reset after animations complete
+                setTimeout(() => setIsAnimating(false), 2000);
             } catch (error) {
                 console.error('Error fetching weather:', error);
             } finally {
@@ -80,11 +72,10 @@ const WeatherCard = ({ selectedCountry, initialCity, searchResults }) => {
         };
 
         fetchWeatherData();
-    }, [selectedCountry, initialCity, countryCities, searchResults]);
+    }, [currentCityInfo]);
 
     // Clear cache when country changes
     useEffect(() => {
-        // Reset weather cache when country changes
         weatherCache.current = {};
     }, [selectedCountry]);
 
@@ -100,7 +91,7 @@ const WeatherCard = ({ selectedCountry, initialCity, searchResults }) => {
     // Get the current city name from the weather data
     const currentCity = weatherData.city || (weatherData.location && weatherData.location.name);
     const backgroundImage = cityBackgrounds[currentCity] || defaultBackground;
-    
+
     // Get forecast data for tomorrow and day after tomorrow
     const tomorrowForecast = weatherData.forecast && weatherData.forecast[1];
     const afterTomorrowForecast = weatherData.forecast && weatherData.forecast[2];
@@ -110,7 +101,7 @@ const WeatherCard = ({ selectedCountry, initialCity, searchResults }) => {
             <div className="relative w-full max-w-[800px] mx-auto">
                 <div className="relative h-[400px] rounded-xl overflow-hidden shadow-xl animate-scaleIn">
                     {/* Background Image with Gradient */}
-                    <div 
+                    <div
                         className="absolute inset-0 bg-cover bg-center transition-all duration-500 ease-in-out"
                         style={{
                             backgroundImage: `url('${backgroundImage}')`
@@ -154,7 +145,7 @@ const WeatherCard = ({ selectedCountry, initialCity, searchResults }) => {
                                     <span className={`text-5xl font-semibold ${isAnimating ? 'animate-slideInUp animation-delay-300' : ''}`}>
                                         {weatherData.temperature || (weatherData.current && Math.round(weatherData.current.temp_c))}°C
                                     </span>
-                                    <img 
+                                    <img
                                         src={weatherData.icon || (weatherData.current && `https:${weatherData.current.condition.icon}`)}
                                         alt={weatherData.condition || (weatherData.current && weatherData.current.condition.text)}
                                         className={`w-16 h-16 ${isAnimating ? 'animate-scaleIn animation-delay-400 animate-pulse-slow' : 'animate-pulse-slow'}`}
@@ -164,7 +155,7 @@ const WeatherCard = ({ selectedCountry, initialCity, searchResults }) => {
                                     </span>
                                 </div>
                             </div>
-                            
+
                             {/* Forecast Cards - Desktop (Bottom Right) */}
                             <div className="hidden md:flex gap-2">
                                 {tomorrowForecast && (
@@ -194,4 +185,4 @@ const WeatherCard = ({ selectedCountry, initialCity, searchResults }) => {
     );
 };
 
-export default WeatherCard; 
+export default WeatherCard;
