@@ -11,7 +11,20 @@ const TranslationContext = createContext();
 const getInitialLanguage = () => {
     const savedLanguage = localStorage.getItem('language');
     console.log('Initial language from localStorage:', savedLanguage);
-    return savedLanguage || 'en';
+    
+    // Always default to English if no language is saved
+    if (!savedLanguage) {
+        console.log('No language preference found, defaulting to English');
+        return 'en';
+    }
+    
+    // Validate that the saved language is supported
+    if (!translations[savedLanguage]) {
+        console.log('Saved language not supported, defaulting to English');
+        return 'en';
+    }
+    
+    return savedLanguage;
 };
 
 export const TranslationProvider = ({ children }) => {
@@ -20,6 +33,13 @@ export const TranslationProvider = ({ children }) => {
     // Custom setter that also updates localStorage
     const setLanguage = (lang) => {
         console.log('Setting language to:', lang);
+        
+        // Validate the language before setting it
+        if (!translations[lang]) {
+            console.warn(`Attempted to set unsupported language: ${lang}, defaulting to English`);
+            lang = 'en';
+        }
+        
         localStorage.setItem('language', lang);
         setLanguageState(lang);
     };

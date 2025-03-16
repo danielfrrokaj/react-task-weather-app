@@ -21,7 +21,7 @@ export const detectUserCountry = async () => {
         }
         
         if (!response.ok) {
-            console.log('All IP services failed, defaulting to Albania');
+            console.log('All IP services failed, defaulting to United Kingdom');
             throw new Error('Failed to fetch location data');
         }
         
@@ -48,6 +48,15 @@ export const detectUserCountry = async () => {
             return {
                 country: 'Italy',
                 city: 'Rome'
+            };
+        }
+        
+        // Handle Netherlands specifically
+        if (data.country === 'NL') {
+            console.log('Netherlands IP detected!');
+            return {
+                country: 'Netherlands',
+                city: 'Amsterdam'
             };
         }
         
@@ -93,18 +102,18 @@ export const detectUserCountry = async () => {
             };
         }
         
-        // Default to Albania if no match found
-        console.log('No match found, defaulting to Albania');
+        // Default to United Kingdom if no match found (instead of Albania)
+        console.log('No match found, defaulting to United Kingdom');
         return {
-            country: 'Albania',
-            city: 'Tirana'
+            country: 'United Kingdom',
+            city: 'London'
         };
     } catch (error) {
         console.error('Error detecting user country:', error);
-        // Default to Albania if there's an error
+        // Default to United Kingdom if there's an error (instead of Albania)
         return {
-            country: 'Albania',
-            city: 'Tirana'
+            country: 'United Kingdom',
+            city: 'London'
         };
     }
 }; 

@@ -21,7 +21,7 @@ export default {
         clothing: 'VESHJE',
         activities: 'AKTIVITETE',
         error: 'Na vjen keq, nuk mund të gjeneroja një rekomandim në këtë moment.',
-        reset: 'Rivendos',
+        reset: 'Rifresko',
         refreshing: 'Duke rifreskuar...'
     },
     location: {
@@ -30,11 +30,11 @@ export default {
         loading: 'Duke marrë vendndodhjen...'
     },
     footer: {
-        developedBy: 'Zhvilluar Nga'
+        developedBy: 'Zhvilluar nga'
     },
     search: {
         placeholder: 'Kërko për një qytet...',
-        suggestions: 'Qytetet të njohura'
+        suggestions: 'Qytete të njohura'
     },
     countries: {
         'Albania': 'Shqipëri',
