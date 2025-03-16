@@ -26,7 +26,7 @@ export const cityBackgrounds = {
     'Oslo': 'https://images.unsplash.com/photo-1513622118278-bc041b3c13ed',
     'Copenhagen': 'https://images.unsplash.com/photo-1513622470522-26c3c8a854bc',
     'Helsinki': 'https://images.unsplash.com/photo-1559650656-5d1d361ad10e',
-    'Dublin': 'https://images.unsplash.com/photo-1549918864-48ac978761a4',
+    'Dublin': 'https://gte-gcms.images.tshiftcdn.com/resize=width%3A2048,fit%3Amax/iCIWQPhTQSHxmP3krFUY?ar=1.91%3A1&w=1200&fit=crop',
     'Lisbon': 'https://images.unsplash.com/photo-1585208798174-6cedd86e019a'
 };
 
