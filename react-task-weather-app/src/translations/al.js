@@ -34,7 +34,7 @@ export default {
     },
     search: {
         placeholder: 'Kërko për një qytet...',
-        suggestions: 'Qytetet Popullore'
+        suggestions: 'Qytetet të njohura'
     },
     countries: {
         'Albania': 'Shqipëri',
