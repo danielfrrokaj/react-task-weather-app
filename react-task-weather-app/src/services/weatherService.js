@@ -43,7 +43,7 @@ export const CAPITAL_CITIES = [
 export const getWeatherForCity = async (cityInfo) => {
     try {
         const response = await fetch(
-            `${BASE_URL}/current.json?key=${API_KEY}&q=${encodeURIComponent(cityInfo.city)}&aqi=no`
+            `${BASE_URL}/forecast.json?key=${API_KEY}&q=${encodeURIComponent(cityInfo.city)}&days=3&aqi=no`
         );
         
         if (!response.ok) {
@@ -51,9 +51,33 @@ export const getWeatherForCity = async (cityInfo) => {
         }
 
         const data = await response.json();
+        
+        // Format the data to match our component expectations
         return {
-            ...data,
-            country: cityInfo.country // Add the country information to the response
+            city: data.location.name,
+            country: cityInfo.country,
+            temperature: Math.round(data.current.temp_c),
+            condition: data.current.condition.text,
+            icon: `https:${data.current.condition.icon}`,
+            humidity: data.current.humidity,
+            wind: data.current.wind_kph,
+            feelsLike: Math.round(data.current.feelslike_c),
+            pressure: data.current.pressure_mb,
+            precipitation: data.current.precip_mm,
+            uv: data.current.uv,
+            windDirection: data.current.wind_dir,
+            // Add forecast data
+            forecast: data.forecast.forecastday.map(day => ({
+                date: day.date,
+                maxTemp: Math.round(day.day.maxtemp_c),
+                minTemp: Math.round(day.day.mintemp_c),
+                condition: day.day.condition.text,
+                icon: `https:${day.day.condition.icon}`,
+                chanceOfRain: day.day.daily_chance_of_rain
+            })),
+            // Include the original data for any other needs
+            location: data.location,
+            current: data.current
         };
     } catch (error) {
         console.error('Error fetching weather data:', error);

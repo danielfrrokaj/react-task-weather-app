@@ -7,14 +7,21 @@ export default {
         humidity: 'Humidity',
         wind: 'Wind',
         feelsLike: 'Feels Like',
-        condition: 'Condition'
+        condition: 'Condition',
+        weatherDetailsFor: 'Weather Details for',
+        country: 'Country',
+        windDirection: 'Wind Direction',
+        pressure: 'Pressure',
+        precipitation: 'Precipitation',
+        uv: 'UV Index'
     },
     ai: {
         title: 'AI Weather Recommendation',
         clothing: 'CLOTHING',
         activities: 'ACTIVITIES',
         error: 'Sorry, I could not generate a recommendation at this time.',
-        reset: 'Reset'
+        reset: 'Reset',
+        refreshing: 'Refreshing...'
     },
     location: {
         useMyLocation: 'Use My Location',
@@ -23,6 +30,10 @@ export default {
     },
     footer: {
         developedBy: 'Developed By'
+    },
+    search: {
+        placeholder: 'Search for a city...',
+        suggestions: 'Popular Cities'
     },
     countries: {
         'Albania': 'Albania',
@@ -40,5 +51,47 @@ export default {
         'Spain': 'Spain',
         'Sweden': 'Sweden',
         'United Kingdom': 'United Kingdom'
-    }
+    },
+    'What to Wear': 'What to Wear',
+    'Recommended Activities': 'Recommended Activities',
+    'Health Tips': 'Health Tips',
+    'Hot Weather Tips': 'Hot Weather Tips',
+    'Mild Weather Tips': 'Mild Weather Tips',
+    'Cool Weather Tips': 'Cool Weather Tips',
+    'Cold Weather Tips': 'Cold Weather Tips',
+    'Light and breathable clothing': 'Light and breathable clothing',
+    'Hat and sunglasses': 'Hat and sunglasses',
+    'Sunscreen': 'Sunscreen',
+    'Light layers': 'Light layers',
+    'Light jacket or sweater': 'Light jacket or sweater',
+    'Comfortable shoes': 'Comfortable shoes',
+    'Warm layers': 'Warm layers',
+    'Light coat or jacket': 'Light coat or jacket',
+    'Scarf and hat': 'Scarf and hat',
+    'Heavy winter coat': 'Heavy winter coat',
+    'Gloves, scarf, and hat': 'Gloves, scarf, and hat',
+    'Thermal layers': 'Thermal layers',
+    'Warm boots': 'Warm boots',
+    'Rainy Weather Activities': 'Rainy Weather Activities',
+    'Snowy Weather Activities': 'Snowy Weather Activities',
+    'Cloudy Weather Activities': 'Cloudy Weather Activities',
+    'Sunny Weather Activities': 'Sunny Weather Activities',
+    'General Weather Activities': 'General Weather Activities',
+    'Visit museums or galleries': 'Visit museums or galleries',
+    'Watch a movie': 'Watch a movie',
+    'Read a book at a café': 'Read a book at a café',
+    'Build a snowman': 'Build a snowman',
+    'Go sledding': 'Go sledding',
+    'Enjoy hot chocolate': 'Enjoy hot chocolate',
+    'Go for a hike': 'Go for a hike',
+    'Have a picnic': 'Have a picnic',
+    'Visit a park': 'Visit a park',
+    'Go for a walk': 'Go for a walk',
+    'Visit local attractions': 'Visit local attractions',
+    'Outdoor photography': 'Outdoor photography',
+    'Low humidity: Stay hydrated and moisturize skin': 'Low humidity: Stay hydrated and moisturize skin',
+    'High humidity: Stay cool and avoid strenuous activities': 'High humidity: Stay cool and avoid strenuous activities',
+    'Extreme heat: Avoid direct sun exposure between 11am-3pm': 'Extreme heat: Avoid direct sun exposure between 11am-3pm',
+    'Freezing temperatures: Protect extremities and limit time outdoors': 'Freezing temperatures: Protect extremities and limit time outdoors',
+    'Stay hydrated regardless of weather': 'Stay hydrated regardless of weather'
 }; 

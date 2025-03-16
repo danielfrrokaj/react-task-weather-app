@@ -1,15 +1,23 @@
 import { useTranslation } from '../context/TranslationContext';
 
 const Footer = () => {
-    const { t } = useTranslation();
+    const { language, setLanguage, t } = useTranslation();
+    
+    console.log('Footer rendering with language:', language);
+
+    const handleLanguageChange = (lang) => {
+        console.log('Language button clicked:', lang);
+        setLanguage(lang);
+    };
 
     return (
         <footer className="w-full bg-white/5 backdrop-blur-sm py-3 px-4 mt-auto">
             <div className="max-w-[800px] mx-auto flex items-center justify-center">
+                
                 <div className="flex items-center gap-2 text-white/80">
                     <span className="text-sm">{t('footer.developedBy')} Danjel Frrokaj</span>
                     <a
-                        href="https://github.com/frrokaj"
+                        href="https://github.com/danielfrrokaj"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="hover:text-white transition-colors duration-200"
