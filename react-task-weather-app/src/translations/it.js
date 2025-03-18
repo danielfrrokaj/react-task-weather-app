@@ -197,11 +197,6 @@ export default {
         search: 'Cerca una città...',
         noResults: 'Nessun risultato trovato'
     },
-    search: {
-        placeholder: 'Cerca una città...',
-        suggestions: 'Città Popolari',
-        noResults: 'Nessun risultato trovato'
-    },
     footer: {
         developedBy: 'Sviluppato Da',
         languages: {
