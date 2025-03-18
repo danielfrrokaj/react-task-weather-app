@@ -29,53 +29,53 @@ const WeatherDetails = ({ weatherData }) => {
                 value: t(`countries.${weatherData.country}`),
                 color: 'text-emerald-500'
             },
-            {
-                icon: 'fa-temperature-half',
+        {
+            icon: 'fa-temperature-half',
                 label: t('weather.feelsLike'),
                 value: isNewFormat 
                     ? `${weatherData.feelsLike}°C`
                     : `${Math.round(weatherData.current.feelslike_c)}°C`,
-                color: 'text-red-500'
-            },
-            {
-                icon: 'fa-droplet',
+            color: 'text-red-500'
+        },
+        {
+            icon: 'fa-droplet',
                 label: t('weather.humidity'),
                 value: isNewFormat
                     ? `${weatherData.humidity}%`
                     : `${weatherData.current.humidity}%`,
-                color: 'text-blue-500'
-            },
-            {
-                icon: 'fa-wind',
+            color: 'text-blue-500'
+        },
+        {
+            icon: 'fa-wind',
                 label: t('weather.wind'),
                 value: isNewFormat
                     ? `${weatherData.wind} km/h`
                     : `${weatherData.current.wind_kph} km/h`,
-                color: 'text-teal-500'
-            },
-            {
-                icon: 'fa-compass',
+            color: 'text-teal-500'
+        },
+        {
+            icon: 'fa-compass',
                 label: t('weather.windDirection'),
                 value: isNewFormat
                     ? weatherData.windDirection
                     : weatherData.current.wind_dir,
-                color: 'text-purple-500'
-            },
-            {
-                icon: 'fa-gauge-high',
+            color: 'text-purple-500'
+        },
+        {
+            icon: 'fa-gauge-high',
                 label: t('weather.pressure'),
                 value: isNewFormat
                     ? `${weatherData.pressure} hPa`
                     : `${weatherData.current.pressure_mb} mb`,
-                color: 'text-amber-500'
-            },
-            {
-                icon: 'fa-cloud-rain',
+            color: 'text-amber-500'
+        },
+        {
+            icon: 'fa-cloud-rain',
                 label: t('weather.precipitation'),
                 value: isNewFormat
                     ? `${weatherData.precipitation} mm`
                     : `${weatherData.current.precip_mm} mm`,
-                color: 'text-indigo-500'
+            color: 'text-indigo-500'
             },
             {
                 icon: 'fa-sun',

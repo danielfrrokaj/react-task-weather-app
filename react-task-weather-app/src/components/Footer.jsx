@@ -12,8 +12,7 @@ const Footer = () => {
 
     return (
         <footer className="w-full bg-white/5 backdrop-blur-sm py-3 px-4 mt-auto">
-            <div className="max-w-[800px] mx-auto flex items-center justify-center">
-                
+            <div className="max-w-[800px] mx-auto flex items-center justify-between">
                 <div className="flex items-center gap-2 text-white/80">
                     <span className="text-sm">{t('footer.developedBy')} Danjel Frrokaj</span>
                     <a
@@ -34,6 +33,40 @@ const Footer = () => {
                             />
                         </svg>
                     </a>
+                </div>
+                
+                {/* Language Switcher */}
+                <div className="flex items-center gap-2">
+                    <button
+                        onClick={() => handleLanguageChange('en')}
+                        className={`px-2 py-1 text-sm rounded-md transition-colors duration-200 ${
+                            language === 'en'
+                                ? 'bg-white/20 text-white'
+                                : 'text-white/70 hover:text-white hover:bg-white/10'
+                        }`}
+                    >
+                        EN
+                    </button>
+                    <button
+                        onClick={() => handleLanguageChange('al')}
+                        className={`px-2 py-1 text-sm rounded-md transition-colors duration-200 ${
+                            language === 'al'
+                                ? 'bg-white/20 text-white'
+                                : 'text-white/70 hover:text-white hover:bg-white/10'
+                        }`}
+                    >
+                        AL
+                    </button>
+                    <button
+                        onClick={() => handleLanguageChange('it')}
+                        className={`px-2 py-1 text-sm rounded-md transition-colors duration-200 ${
+                            language === 'it'
+                                ? 'bg-white/20 text-white'
+                                : 'text-white/70 hover:text-white hover:bg-white/10'
+                        }`}
+                    >
+                        IT
+                    </button>
                 </div>
             </div>
         </footer>

@@ -28,16 +28,23 @@ function AppContent() {
     const detectLocation = async () => {
       try {
         setIsLoading(true);
-        const { country, city } = await detectUserCountry();
+        const { country, city, language } = await detectUserCountry();
         setSelectedCountry(country);
         setSelectedCity(city);
         
-        // Set language based on detected country
-        const detectedLanguage = COUNTRY_LANGUAGE_MAP[country] || 'en';
-        console.log('Setting language based on country:', country, 'Language:', detectedLanguage);
-        setLanguage(detectedLanguage);
+        // Only set language on initial load if it's not already set in localStorage
+        const savedLanguage = localStorage.getItem('language');
+        if (!savedLanguage) {
+          console.log('Setting initial language based on IP detection:', language);
+          setLanguage(language);
+        }
       } catch (error) {
         console.error('Error detecting location:', error);
+        // Only set default language if none is saved
+        const savedLanguage = localStorage.getItem('language');
+        if (!savedLanguage) {
+          setLanguage('en');
+        }
       } finally {
         setIsLoading(false);
       }
@@ -56,10 +63,6 @@ function AppContent() {
     setSelectedCountry(country);
     setSelectedCity(city);
     setSearchResults(null); // Clear search results
-    
-    // Update language when location changes
-    const newLanguage = COUNTRY_LANGUAGE_MAP[country] || 'en';
-    setLanguage(newLanguage);
   };
 
   const handleSearch = async (query) => {

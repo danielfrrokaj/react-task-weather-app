@@ -3,9 +3,16 @@ import { CAPITAL_CITIES } from './weatherService';
 // Get unique countries from CAPITAL_CITIES
 const availableCountries = [...new Set(CAPITAL_CITIES.map(city => city.country))];
 
+// Country to language mapping
+const COUNTRY_LANGUAGE_MAP = {
+    'AL': 'al',
+    'IT': 'it',
+    // All other countries will default to English
+};
+
 /**
  * Detects the user's country based on their IP address
- * @returns {Promise<{country: string, city: string|null}>} The detected country and city (if available)
+ * @returns {Promise<{country: string, city: string|null, language: string}>} The detected country, city, and language
  */
 export const detectUserCountry = async () => {
     try {
@@ -30,33 +37,41 @@ export const detectUserCountry = async () => {
         
         // Different APIs return country in different formats
         const detectedCountry = data.country_name || data.country || '';
-        console.log('Detected country code:', data.country);
+        const countryCode = data.country || '';
+        console.log('Detected country code:', countryCode);
         console.log('Detected country name:', detectedCountry);
         
+        // Determine language based on country code
+        const language = COUNTRY_LANGUAGE_MAP[countryCode] || 'en';
+        console.log('Detected language:', language);
+        
         // Handle country code (AL for Albania)
-        if (data.country === 'AL') {
+        if (countryCode === 'AL') {
             console.log('Albanian IP detected!');
             return {
                 country: 'Albania',
-                city: 'Tirana'
+                city: 'Tirana',
+                language: 'al'
             };
         }
         
         // Handle country code (IT for Italy)
-        if (data.country === 'IT') {
+        if (countryCode === 'IT') {
             console.log('Italian IP detected!');
             return {
                 country: 'Italy',
-                city: 'Rome'
+                city: 'Rome',
+                language: 'it'
             };
         }
         
         // Handle Netherlands specifically
-        if (data.country === 'NL') {
+        if (countryCode === 'NL') {
             console.log('Netherlands IP detected!');
             return {
                 country: 'Netherlands',
-                city: 'Amsterdam'
+                city: 'Amsterdam',
+                language: 'en'
             };
         }
         
@@ -98,22 +113,25 @@ export const detectUserCountry = async () => {
             
             return {
                 country: matchedCountry,
-                city: matchedCity ? matchedCity.city : (citiesInCountry.length > 0 ? citiesInCountry[0].city : null)
+                city: matchedCity ? matchedCity.city : (citiesInCountry.length > 0 ? citiesInCountry[0].city : null),
+                language: language
             };
         }
         
-        // Default to United Kingdom if no match found (instead of Albania)
+        // Default to United Kingdom if no match found
         console.log('No match found, defaulting to United Kingdom');
         return {
             country: 'United Kingdom',
-            city: 'London'
+            city: 'London',
+            language: 'en'
         };
     } catch (error) {
         console.error('Error detecting user country:', error);
-        // Default to United Kingdom if there's an error (instead of Albania)
+        // Default to United Kingdom if there's an error
         return {
             country: 'United Kingdom',
-            city: 'London'
+            city: 'London',
+            language: 'en'
         };
     }
 }; 
