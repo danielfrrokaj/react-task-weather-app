@@ -36,6 +36,24 @@ export default {
         precipitationMin: 'Precipitazioni Minime',
         uvIndexMax: 'Indice UV Massimo',
         uvIndexMin: 'Indice UV Minimo',
+        details: {
+            title: 'Dettagli Meteo per',
+            windSpeed: 'Velocità del Vento',
+            windDirection: 'Direzione del Vento',
+            humidity: 'Umidità',
+            pressure: 'Pressione',
+            visibility: 'Visibilità',
+            uvIndex: 'Indice UV',
+            dewPoint: 'Punto di Rugiada',
+            sunrise: 'Alba',
+            sunset: 'Tramonto',
+            moonrise: 'Sorgere della Luna',
+            moonset: 'Tramonto della Luna',
+            moonPhase: 'Fase Lunare',
+            precipitation: 'Precipitazioni',
+            cloudCover: 'Copertura Nuvolosa',
+            windGust: 'Raffiche di Vento'
+        },
         conditions: {
             'clear': 'Sereno',
             'partly-cloudy': 'Parzialmente Nuvoloso',
@@ -65,97 +83,97 @@ export default {
         recommendations: {
             clothing: {
                 hot: {
-                    title: 'Abbigliamento per il Caldo',
+                    title: 'Abbigliamento per Clima Caldo',
                     items: [
-                        'Abbigliamento leggero e traspirante',
-                        'Cappello per protezione dal sole',
-                        'Occhiali da sole',
-                        'Crema solare SPF alta',
-                        'Scarpe comode e traspiranti'
+                        'Indossa abiti leggeri e traspiranti',
+                        'Usa tessuti naturali come cotone e lino',
+                        'Indossa un cappello per proteggerti dal sole',
+                        'Usa occhiali da sole con protezione UV',
+                        'Indossa scarpe aperte e comode'
                     ]
                 },
                 warm: {
-                    title: 'Abbigliamento per il Caldo Moderato',
+                    title: 'Abbigliamento per Clima Caldo',
                     items: [
-                        'Abbigliamento leggero',
-                        'Cappello per il sole',
-                        'Occhiali da sole',
-                        'Crema solare',
-                        'Scarpe comode'
+                        'Indossa abiti leggeri',
+                        'Porta con te un capo leggero per la sera',
+                        'Indossa scarpe comode',
+                        'Usa occhiali da sole'
                     ]
                 },
                 mild: {
-                    title: 'Abbigliamento per Temperatura Moderata',
+                    title: 'Abbigliamento per Clima Temperato',
                     items: [
-                        'Abbigliamento a strati leggeri',
-                        'Giacca leggera',
-                        'Scarpe comode',
-                        'Accessori per il sole'
+                        'Indossa abiti a strati',
+                        'Porta con te un giacchetto leggero',
+                        'Indossa scarpe comode',
+                        'Porta con te un ombrello'
                     ]
                 },
                 cool: {
-                    title: 'Abbigliamento per il Fresco',
+                    title: 'Abbigliamento per Clima Fresco',
                     items: [
-                        'Giacca calda',
-                        'Abbigliamento a strati',
-                        'Scarpe chiuse',
-                        'Sciarpa leggera'
+                        'Indossa abiti caldi a strati',
+                        'Porta con te un giacchetto caldo',
+                        'Indossa guanti e sciarpa',
+                        'Indossa scarpe calde e impermeabili'
                     ]
                 },
                 cold: {
-                    title: 'Abbigliamento per il Freddo',
+                    title: 'Abbigliamento per Clima Freddo',
                     items: [
-                        'Giacca pesante',
-                        'Abbigliamento termico',
-                        'Stivali caldi',
-                        'Guanti e cappello'
+                        'Indossa abiti caldi a strati',
+                        'Porta con te un cappotto caldo',
+                        'Indossa guanti, sciarpa e cappello',
+                        'Indossa scarpe calde e impermeabili'
                     ]
                 }
             },
             activities: {
                 hot: {
-                    title: 'Attività per il Caldo',
+                    title: 'Attività per Clima Caldo',
                     items: [
-                        'Nuoto',
-                        'Attività acquatiche',
-                        'Esercizi al mattino presto',
-                        'Attività in ombra'
+                        'Nuota in piscina o al mare',
+                        'Fai attività all\'aperto al mattino presto',
+                        'Visita musei o luoghi al chiuso',
+                        'Fai una passeggiata all\'ombra',
+                        'Organizza un picnic in un parco ombreggiato'
                     ]
                 },
                 warm: {
-                    title: 'Attività per il Caldo Moderato',
+                    title: 'Attività per Clima Caldo',
                     items: [
-                        'Sport all\'aperto',
-                        'Escursioni leggere',
-                        'Ciclismo',
-                        'Attività ricreative'
+                        'Fai una passeggiata all\'aperto',
+                        'Visita parchi e giardini',
+                        'Organizza un picnic',
+                        'Fai attività sportive all\'aperto'
                     ]
                 },
                 mild: {
-                    title: 'Attività per Temperatura Moderata',
+                    title: 'Attività per Clima Temperato',
                     items: [
-                        'Jogging',
-                        'Ciclismo',
-                        'Escursioni',
-                        'Sport all\'aperto'
+                        'Fai escursioni all\'aperto',
+                        'Visita siti turistici',
+                        'Fai attività sportive',
+                        'Organizza un picnic'
                     ]
                 },
                 cool: {
-                    title: 'Attività per il Fresco',
+                    title: 'Attività per Clima Fresco',
                     items: [
-                        'Camminate',
-                        'Jogging leggero',
-                        'Attività indoor',
-                        'Escursioni brevi'
+                        'Fai una passeggiata nel parco',
+                        'Visita musei e gallerie',
+                        'Fai attività sportive al chiuso',
+                        'Organizza una gita in città'
                     ]
                 },
                 cold: {
-                    title: 'Attività per il Freddo',
+                    title: 'Attività per Clima Freddo',
                     items: [
-                        'Sci',
-                        'Pattinaggio',
-                        'Attività indoor',
-                        'Escursioni invernali'
+                        'Fai attività sportive al chiuso',
+                        'Visita musei e gallerie',
+                        'Organizza attività al chiuso',
+                        'Fai una passeggiata breve e ben coperto'
                     ]
                 }
             },
@@ -163,28 +181,47 @@ export default {
                 hot: {
                     title: 'Consigli per la Salute in Clima Caldo',
                     items: [
-                        'Bere molta acqua',
-                        'Evitare l\'esposizione diretta al sole',
-                        'Usare crema solare',
-                        'Fare pause frequenti'
+                        'Bevi molta acqua',
+                        'Evita l\'esposizione diretta al sole',
+                        'Usa crema solare con SPF alto',
+                        'Fai pause frequenti all\'ombra',
+                        'Monitora i segni di disidratazione'
+                    ]
+                },
+                warm: {
+                    title: 'Consigli per la Salute in Clima Caldo',
+                    items: [
+                        'Bevi acqua regolarmente',
+                        'Usa crema solare',
+                        'Fai pause all\'ombra',
+                        'Indossa un cappello'
+                    ]
+                },
+                mild: {
+                    title: 'Consigli per la Salute in Clima Temperato',
+                    items: [
+                        'Mantieni una buona idratazione',
+                        'Porta con te acqua',
+                        'Indossa abiti appropriati',
+                        'Fai pause regolari'
+                    ]
+                },
+                cool: {
+                    title: 'Consigli per la Salute in Clima Fresco',
+                    items: [
+                        'Mantieni il corpo caldo',
+                        'Bevi bevande calde',
+                        'Indossa abiti caldi',
+                        'Fai attività moderate'
                     ]
                 },
                 cold: {
                     title: 'Consigli per la Salute in Clima Freddo',
                     items: [
-                        'Mantenersi caldi',
-                        'Proteggere le estremità',
-                        'Evitare l\'esposizione prolungata',
-                        'Indossare abiti appropriati'
-                    ]
-                },
-                rain: {
-                    title: 'Consigli per la Salute in Caso di Pioggia',
-                    items: [
-                        'Indossare abiti impermeabili',
-                        'Proteggere gli effetti personali',
-                        'Fare attenzione alle superfici scivolose',
-                        'Evitare temporali'
+                        'Mantieni il corpo caldo',
+                        'Bevi bevande calde',
+                        'Indossa abiti caldi a strati',
+                        'Limita l\'esposizione al freddo'
                     ]
                 }
             }
@@ -195,7 +232,9 @@ export default {
         error: 'Impossibile trovare la tua posizione',
         loading: 'Ottenendo la posizione...',
         search: 'Cerca una città...',
-        noResults: 'Nessun risultato trovato'
+        noResults: 'Nessun risultato trovato',
+        popularCities: 'Città Popolari',
+        placeholder: 'Inserisci il nome di una città...'
     },
     footer: {
         developedBy: 'Sviluppato Da',
