@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useTranslation } from '../context/TranslationContext';
 
-const AIRecommendations = ({ weatherData, isVisible }) => {
+const AIRecommendations = ({ weatherData, isVisible, isEmbedded = false }) => {
     const [recommendation, setRecommendation] = useState('');
     const [displayedText, setDisplayedText] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -191,102 +191,27 @@ const AIRecommendations = ({ weatherData, isVisible }) => {
         }
     };
 
-    // Typing animation effect
     useEffect(() => {
-        if (!recommendation || !isTyping) return;
-        
-        // Remove HTML tags for typing animation
-        const plainText = recommendation.replace(/<[^>]*>/g, '');
-        
-        // Split the text into lines for line-by-line typing
-        const lines = plainText.split('\n').filter(line => line.trim() !== '');
-        let currentLineIndex = 0;
-        let currentCharIndex = 0;
-        
-        const typingInterval = setInterval(() => {
-            if (currentLineIndex < lines.length) {
-                const currentLine = lines[currentLineIndex];
-                
-                if (currentCharIndex <= currentLine.length) {
-                    // Get all completed lines
-                    const completedLines = lines.slice(0, currentLineIndex);
-                    
-                    // Get the current line being typed
-                    const typingLine = currentLine.substring(0, currentCharIndex);
-                    
-                    // Combine completed lines with the current typing line
-                    let formattedText = [...completedLines, typingLine].join('\n');
-                    
-                    // Apply formatting
-                    formattedText = formattedText.replace(/\b[A-Z]{2,}\b/g, match => `<strong>${match}</strong>`);
-                    
-                    // Add line breaks for lines starting with dash
-                    formattedText = formattedText.split('\n').map(line => {
-                        if (line.trim().startsWith('-')) {
-                            return `<br/>${line}`;
-                        }
-                        return line;
-                    }).join('\n');
-                    
-                    setDisplayedText(formattedText);
-                    currentCharIndex++;
+        if (isVisible) {
+            const recommendations = recommendation || recommendation.split('\n').join('');
+            let currentIndex = 0;
+            setIsTyping(true);
+
+            const typingInterval = setInterval(() => {
+                if (currentIndex < recommendations.length) {
+                    setDisplayedText(recommendations.slice(0, currentIndex + 1));
+                    currentIndex++;
                 } else {
-                    // Move to the next line
-                    currentLineIndex++;
-                    currentCharIndex = 0;
-                    
-                    // Add a slight pause between lines
                     clearInterval(typingInterval);
-                    setTimeout(() => {
-                        const newTypingInterval = setInterval(() => {
-                            if (currentLineIndex < lines.length) {
-                                const currentLine = lines[currentLineIndex];
-                                
-                                if (currentCharIndex <= currentLine.length) {
-                                    // Get all completed lines
-                                    const completedLines = lines.slice(0, currentLineIndex);
-                                    
-                                    // Get the current line being typed
-                                    const typingLine = currentLine.substring(0, currentCharIndex);
-                                    
-                                    // Combine completed lines with the current typing line
-                                    let formattedText = [...completedLines, typingLine].join('\n');
-                                    
-                                    // Apply formatting
-                                    formattedText = formattedText.replace(/\b[A-Z]{2,}\b/g, match => `<strong>${match}</strong>`);
-                                    
-                                    // Add line breaks for lines starting with dash
-                                    formattedText = formattedText.split('\n').map(line => {
-                                        if (line.trim().startsWith('-')) {
-                                            return `<br/>${line}`;
-                                        }
-                                        return line;
-                                    }).join('\n');
-                                    
-                                    setDisplayedText(formattedText);
-                                    currentCharIndex++;
-                                } else {
-                                    // Move to the next line
-                                    currentLineIndex++;
-                                    currentCharIndex = 0;
-                                }
-                            } else {
-                                clearInterval(newTypingInterval);
-                                setDisplayedText(recommendation);
-                                setIsTyping(false);
-                            }
-                        }, 20); // Adjust typing speed here
-                    }, 200); // Pause between lines
+                    setIsTyping(false);
                 }
-            } else {
-                clearInterval(typingInterval);
-                setDisplayedText(recommendation);
-                setIsTyping(false);
-            }
-        }, 20); // Adjust typing speed here
-        
-        return () => clearInterval(typingInterval);
-    }, [recommendation, isTyping]);
+            }, 50);
+
+            return () => clearInterval(typingInterval);
+        } else {
+            setDisplayedText('');
+        }
+    }, [isVisible, recommendation]);
 
     useEffect(() => {
         if (!isVisible) {
@@ -298,6 +223,8 @@ const AIRecommendations = ({ weatherData, isVisible }) => {
             generateRecommendation(weatherData);
         }
     }, [isVisible, weatherData]);
+
+    const textStyle = isEmbedded ? { color: 'var(--ai-text-color, #ffffff)' } : {};
 
     if (!isVisible) return null;
 
