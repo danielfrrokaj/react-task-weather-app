@@ -128,25 +128,42 @@ function AppContent() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-slate-900 to-black flex flex-col pt-4 md:pt-8">
-      <LocationButton onLocationFound={handleLocationFound} />
-      <Header 
-        selectedCountry={selectedCountry} 
-        onCountryChange={handleCountryChange}
-      />
-      <SearchBar onSearch={handleSearch} />
-      <CitySuggestions 
-        onCitySelect={handleCitySuggestionSelect} 
-        selectedCountry={selectedCountry} 
-      />
-      {!isLoading && (
-        <WeatherCard 
-          selectedCountry={selectedCountry} 
-          initialCity={selectedCity}
-          searchResults={searchResults}
-        />
-      )}
-      <Footer />
+    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-slate-900 to-black">
+      <div className="flex flex-col items-center w-full">
+        <div className="w-full max-w-4xl px-4 py-8 space-y-6">
+          {/* Header */}
+          <Header 
+            selectedCountry={selectedCountry} 
+            onCountryChange={handleCountryChange}
+          />
+
+          {/* Search Bar */}
+          <SearchBar onSearch={handleSearch} />
+
+          {/* City Suggestions */}
+          <CitySuggestions 
+            onCitySelect={handleCitySuggestionSelect} 
+            selectedCountry={selectedCountry} 
+          />
+
+          {/* Weather Card with AI and Details */}
+          {!isLoading && (
+            <div className="w-full">
+              <WeatherCard 
+                selectedCountry={selectedCountry} 
+                initialCity={selectedCity}
+                searchResults={searchResults}
+              />
+            </div>
+          )}
+
+          {/* Location Button - Moving to bottom */}
+          <LocationButton onLocationFound={handleLocationFound} />
+
+          {/* Footer */}
+          <Footer />
+        </div>
+      </div>
     </div>
   );
 }
