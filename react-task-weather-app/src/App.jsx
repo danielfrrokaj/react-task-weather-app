@@ -25,12 +25,14 @@ function AppContent() {
   const [searchResults, setSearchResults] = useState(null);
   const { setLanguage } = useTranslation();
 
-  // Check if we're on the embed or widget config page
-  const path = window.location.pathname;
-  if (path === '/embed') {
+  // Get the current path
+  const path = window.location.pathname.toLowerCase();
+
+  // Handle different routes
+  if (path === '/embed' || path.startsWith('/embed/')) {
     return <EmbedPage />;
   }
-  if (path === '/widget') {
+  if (path === '/widget' || path.startsWith('/widget/')) {
     return <WidgetConfigPage />;
   }
 
